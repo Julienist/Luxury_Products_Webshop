@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import "../../styles.scss";
+
+.Nav-bar {
+  background: $header-main-color;
+  border-bottom: 4px solid #ffd700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
+  font-family: $retro-font;
+
+  ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    list-style: none;
+    margin: 0;
+    gap: 20px;
+  }
+
+  li {
+    padding: 5px;
+    list-style: none;
+    margin: 0;
+  }
+
+  li a {
+    padding: 12px 20px;
+    background: #ffd700;
+    color: #2d2d2d;
+    overflow: hidden;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 14px;
+    border: 3px solid #7a0000;
+    transition: all 0.3s ease;
+    box-shadow: 4px 4px 0px #2d2d2d;
+    cursor: pointer;
+
+    &:hover {
+      background: #ff9900;
+      color: #fff;
+      text-shadow: 2px 2px 0px #000;
+      box-shadow: 4px 4px 0px #000;
+      transform: translateY(-2px);
+    }
+
+    &.active {
+      background: #ff6600;
+      color: white;
+      box-shadow: 4px 4px 0px #000;
+    }
+  }
+
+  button {
+    padding: 12px 20px;
+    background: #7a0000;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border: 3px solid #ffd700;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 4px 4px 0px #2d2d2d;
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    &:hover {
+      background: #ff3300;
+      box-shadow: 4px 4px 0px #000;
+    }
+
+    &:active {
+      background: #b30000;
+      box-shadow: 4px 4px 0px #000;
+    }
+  }
+}
+
+.header-space {
+  padding-top: 90px;
+}

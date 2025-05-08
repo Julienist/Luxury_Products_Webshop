@@ -1,0 +1,11 @@
+<nav class="Nav-bar">
+  <ul>
+    <li><a routerLink="/">{{ 'header.homepage' | translate }}</a></li>
+    <li><a routerLink="/products">{{ 'header.products' | translate }}</a></li>
+    <li><a routerLink="/cart">{{ 'header.cart' | translate }}</a></li>
+    <li><a routerLink="/register">{{ 'header.reg' | translate }}</a></li>
+    <li><a (click)="goToUser(userService.getUserId())">{{ 'header.user' | translate }}</a></li>
+  </ul>
+  <button (click)="logout()">Logout</button>
+</nav>
+<div class="header-space"></div>

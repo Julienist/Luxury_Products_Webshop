@@ -1,0 +1,177 @@
+.order-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  background: #f4f1de;
+  border-radius: 16px;
+  box-shadow: 4px 4px 0px #3a3a3a;
+  max-width: 900px;
+  margin: auto;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.error-message {
+  color: #d62828;
+  background: #f2dede;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 0px #3a3a3a;
+  text-align: center;
+}
+
+.user-info {
+  background: #fff;
+  padding: 15px;
+  border-radius: 12px;
+  border: 4px solid #3a3a3a;
+  box-shadow: 4px 4px 0px #3a3a3a;
+  text-align: center;
+}
+
+.order-title, .order-subtitle {
+  font-size: 1.8rem;
+  color: #d62828;
+  text-shadow: 2px 2px 0px #3a3a3a;
+}
+
+.order-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 12px;
+  border: 4px solid #3a3a3a;
+  box-shadow: 4px 4px 0px #3a3a3a;
+}
+
+.order-item {
+  display: flex;
+  justify-content: space-between;
+  background: #ddd;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 0px #3a3a3a;
+}
+
+.order-id, .order-total {
+  font-size: 1.2rem;
+  color: #218380;
+  font-weight: bold;
+}
+
+.no-user-message {
+  text-align: center;
+  font-size: 1.1em;
+
+  a {
+    color: #d62828;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+    text-shadow: 2px 2px 0px #3a3a3a;
+
+    &:hover {
+      text-decoration: underline;
+      color: #ffcc00;
+    }
+  }
+}
+
+.scrollable-order-list {
+  max-height: 400px;
+  max-width: 100%;
+  overflow-y: auto;
+  padding-right: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #3a3a3a #f4f1de;
+
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f4f1de;
+    border-radius: 8px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #3a3a3a;
+    border-radius: 8px;
+    border: 2px solid #f4f1de;
+  }
+}
+
+.order-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-items-list {
+  list-style: none;
+  padding-left: 1rem;
+  margin: 0;
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.order-item-details {
+  display: flex;
+  justify-content: space-between;
+  background: #fefefe;
+  border: 2px solid #3a3a3a;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  box-shadow: 2px 2px 0px #3a3a3a;
+  font-family: 'Press Start 2P', cursive;
+}
+
+.order-item-name,
+.order-item-quantity,
+.order-item-price {
+  color: #000;
+  font-weight: bold;
+  text-shadow: 1px 1px 0px #ccc;
+}
+
+.order-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.order-items-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.order-item-details {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  padding: 10px;
+  border-radius: 8px;
+  border: 2px solid #3a3a3a;
+  box-shadow: 2px 2px 0px #3a3a3a;
+}
+
+.order-item-top {
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-item-bottom {
+  margin-top: 0.5rem;
+  text-align: right;
+  font-weight: bold;
+  color: #218380;
+}
+

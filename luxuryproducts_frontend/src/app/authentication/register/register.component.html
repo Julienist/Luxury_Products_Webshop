@@ -1,0 +1,35 @@
+<div class="form-container">
+  <h2>{{ 'auth.register' | translate }}</h2>
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" formControlName="email" required />
+      @if (email?.touched && email?.invalid){
+        <span>{{ 'auth.span-message-email' | translate }}</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'auth.password' | translate }}:</label>
+      <input type="password" formControlName="password" required />
+      @if (password?.touched && password?.invalid){
+        <span>{{ 'auth.span-message-password' | translate }}</span>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>{{ 'auth.password_confirm' | translate }}:</label>
+      <input type="password" formControlName="password_confirmation" required />
+      @if (password_confirmation?.touched && password_confirmation?.invalid){
+        <span>{{ 'auth.span-message-password' | translate }}</span>
+      }
+      @if (registerForm.errors?.['passwordsMismatch'] && password_confirmation?.touched){
+        <span class="error">{{ 'auth.password_mismatch' | translate }}</span>
+      }
+    </div>
+
+    <button type="submit" class="submit-btn">{{ 'auth.register' | translate }}</button>
+  </form>
+
+  <p>{{ 'auth.hasAccount' | translate }}<a routerLink="/login">{{ 'auth.login-link' | translate }}</a></p>
+</div>
