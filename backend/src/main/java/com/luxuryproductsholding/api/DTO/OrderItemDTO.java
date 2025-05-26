@@ -1,0 +1,15 @@
+package com.luxuryproductsholding.api.DTO;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+public class OrderItemDTO {
+    private Long productId;
+    private String productName;
+    private int quantity;
+    private double price;
+}
