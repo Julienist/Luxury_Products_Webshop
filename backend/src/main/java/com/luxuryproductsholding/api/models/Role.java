@@ -12,7 +12,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 public class Role {
     @Id
@@ -22,4 +21,12 @@ public class Role {
     @Column(unique = true)
     private String name; // e.g. "ROLE_CEO", "ROLE_CFO", etc.
 
+    public Role(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

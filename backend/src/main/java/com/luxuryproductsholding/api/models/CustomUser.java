@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Setter
@@ -31,7 +32,12 @@ public class CustomUser {
     public CustomUser(String email, String password) {
         this.email = email;
         this.password = password;
+        this.roles = new HashSet<>();
     }
 
-
+    public CustomUser(String email, String password, String encodedPassword) {
+        this.email = email;
+        this.password = encodedPassword; // Store the encoded password
+        this.roles = new HashSet<>();
+    }
 }
