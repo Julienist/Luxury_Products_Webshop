@@ -52,7 +52,7 @@ export class RegisterComponent {
       password: this.registerForm.get("password")?.value
     };
     this.registrationService.register(registerData).subscribe({
-      next: (resData) => {
+      next: (resData): void => {
         const userId = resData.userId;
         if (userId) {
           this.cartService.setUser(userId);

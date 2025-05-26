@@ -65,4 +65,8 @@ export class UserService {
     localStorage.setItem('authToken', token);
   }
 
+  public saveUserEmailInLocalStorage(email: string): void {
+    localStorage.setItem('userEmail', email);
+  }
+
 }

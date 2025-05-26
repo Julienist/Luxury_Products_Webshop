@@ -91,7 +91,7 @@ public class AuthController {
         // Save the new user to the database
         userDAO.save(registeredCustomUser);
         String token = jwtUtil.generateToken(registeredCustomUser.getEmail());
-        LoginResponse loginResponse = new LoginResponse(registeredCustomUser.getEmail(), registeredCustomUser.getRoles(), token);
+        LoginResponse loginResponse = new LoginResponse(registeredCustomUser.getId(), registeredCustomUser.getEmail(), registeredCustomUser.getRoles(), token);
         return ResponseEntity.ok(loginResponse);
     }
 
@@ -106,7 +106,7 @@ public class AuthController {
             String token = jwtUtil.generateToken(body.getEmail());
 
             CustomUser customUser = userDAO.findByEmail(body.getEmail());
-            LoginResponse loginResponse = new LoginResponse(customUser.getEmail(), customUser.getRoles(), token);
+            LoginResponse loginResponse = new LoginResponse(customUser.getId(), customUser.getEmail(), customUser.getRoles(), token);
 
 
             return ResponseEntity.ok(loginResponse);

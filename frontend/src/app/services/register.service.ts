@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { tap } from 'rxjs';
-import { ResponseAuthData } from '../models/ResponseAuthData';
+import {Observable, tap} from 'rxjs';
+import {ResponseAuthData, UserRole} from '../models/ResponseAuthData';
 import {environment} from '../../environments/environment';
 import {UserService} from './user.service';
 
@@ -13,6 +13,7 @@ export class RegistrationService {
   private httpClient = inject(HttpClient);
   private userService = inject(UserService);
   private loggedIn: boolean = false;
+  private userRoles: string[] = [];
   private token: string | null = null;
 
   constructor() {
@@ -22,7 +23,7 @@ export class RegistrationService {
     }
   }
 
-  public register(registerData: { email: string | null | undefined; password: string | null | undefined }) {
+  public register(registerData: { email: string | null | undefined; password: string | null | undefined;}): Observable<ResponseAuthData> {
     return this.httpClient.post<ResponseAuthData>(
       environment.baseApiUrl + '/auth/register',
       registerData
@@ -31,7 +32,11 @@ export class RegistrationService {
         if (resData.token) {
           this.loggedIn = true;
           this.token = resData.token;
-          this.userService.saveTokenInLocalStorage(resData.token)
+          this.userService.saveTokenInLocalStorage(resData.token);
+          this.userService.saveUserEmailInLocalStorage(resData.email);
+          if (resData.roles) {
+            this.mapAndStoreRoles(resData.roles);
+          }
         }
       },
       error => {
@@ -45,5 +50,10 @@ export class RegistrationService {
 
   private loadTokenFromLocalStorage(){
     this.token = localStorage.getItem('authToken');
+  }
+
+  private mapAndStoreRoles(roles: UserRole[]): void {
+    this.userRoles = roles.map(role => role.name);
+    localStorage.setItem('userRoles', JSON.stringify(this.userRoles));
   }
 }

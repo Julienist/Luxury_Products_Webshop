@@ -10,7 +10,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class LoginResponse {
 
-//    private String userId;
+    private long userId;
     private String email;
     private Set<Role> roles;
     private String token;
