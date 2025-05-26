@@ -1,0 +1,86 @@
+{
+  "user": {
+    "info": "Ihr konto"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "amount": "Menge: ",
+    "total": "Total: ",
+    "del": "Löschen",
+    "empty": "Warenkorb leeren",
+    "checkout": "Zur Kasse",
+    "noCart": "Ihr Warenkorb ist leer.",
+    "warning": "Stelle sicher, dass du ein Konto erstellst, um deinen Warenkorb zu speichern."
+  },
+  "product": {
+    "buy": "Kaufen",
+    "price": "Preis: €",
+    "add": "In den Warenkorb",
+    "loading": "Produkt wird geladen...",
+    "stock": "Lagerbestand: ",
+    "out-of-stock": "Produkt nicht auf Lager",
+    "unavailable": "Nicht verfügbar"
+  },
+  "orders": {
+    "title": "Bestellung aufgeben",
+    "address": "Lieferadresse:",
+    "place": "Bestellung aufgeben",
+    "view": "Meine Bestellungen ansehen",
+    "your-orders": "Ihre Bestellungen",
+    "order": "Bestellung #",
+    "total": "Gesamt: €",
+    "no-user": "Sie sind nicht angemeldet",
+    "login": "Login",
+    "register": "Registrieren"
+  },
+  "homepage": {
+    "welcome": "Willkommen bei Luxury Products",
+    "welcome-p": "Ihr Ziel für exquisite und hochwertige Luxusartikel.",
+    "collection": "Entdecken Sie Unsere Kollektion",
+    "games": "Exklusive Kollektionen",
+    "games-p": "Entdecken Sie unsere sorgfältig ausgewählten Selektionen von weltbekannten Designern.",
+    "consoles": "Zeitlose Eleganz",
+    "consoles-p": "Erleben Sie den Gipfel der Handwerkskunst und des raffinierten Designs.",
+    "accessories": "Premium Qualität",
+    "accessories-p": "Gönnen Sie sich Produkte aus den besten Materialien und mit größter Sorgfalt bis ins kleinste Detail."
+  },
+  "header": {
+    "homepage": "Startseite",
+    "products": "Produkte",
+    "cart": "Warenkorb",
+    "reg": "Registrieren",
+    "admin-pan": "Admin-Panel",
+    "user": "Mein Konto"
+  },
+  "footer": {
+    "copyright": "© 2025 Luxury Products"
+  },
+  "category": {
+    "selector": "Kategorie wählen: ",
+    "all": "Alle"
+  },
+  "auth": {
+    "register": "Registrieren",
+    "span-message-email": "Ungültige E-Mail-Adresse angegeben",
+    "span-message-password": "Passwort nicht sicher genug",
+    "register-button": "Registrieren",
+    "password": "Passwort",
+    "password_confirm": "Passwort bestätigen",
+    "password_mismatch": "Passwörter stimmen nicht überein",
+    "verification": "Bestätigungscode",
+    "new-admin": "Einen neuen Admin registrieren",
+    "hasAccount": "Bereits ein Konto? ",
+    "login-link": "Hier anmelden",
+    "noAccount": "Noch kein Konto? ",
+    "register-link": "Hier registrieren"
+  },
+  "blog": {
+    "header": "Sprache wechseln",
+    "text": "Dies ist ein kleiner Test, wie ich die Sprache mit zwei Tasten ändern kann. :)"
+  },
+  "switch-language": {
+    "switchToNL": "Sprache auf Niederländisch setzen",
+    "switchToEN": "Sprache auf Englisch setzen",
+    "switchToDE": "Sprache auf Deutch setzen"
+  }
+}

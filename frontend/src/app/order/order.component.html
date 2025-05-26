@@ -1,0 +1,13 @@
+<div class="order-container">
+  <h2 class="order-title">{{ 'orders.title' | translate }}</h2>
+
+  <form [formGroup]="orderForm" (ngSubmit)="submitOrder()">
+    <input id="street" formControlName="street" class="order-input" placeholder="Enter your streetname" required>
+
+    <input id="city" formControlName="city" class="order-input" placeholder="Enter your city" required>
+
+    <input id="zip_code" formControlName="zip_code" class="order-input" placeholder="Enter your zip code" required>
+
+    <button type="submit" class="order-button" [disabled]="orderForm.invalid">{{ 'orders.place' | translate }}</button>
+  </form>
+</div>
