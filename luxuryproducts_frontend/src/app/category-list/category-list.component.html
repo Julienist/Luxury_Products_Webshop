@@ -1,9 +1,0 @@
-<div class="category-container">
-  <label for="categorySelect">{{ 'category.selector' | translate }}</label>
-  <select id="categorySelect" (change)="setSelectedCategory($event)">
-    <option value="">{{ 'category.all' | translate }}</option>
-    <option *ngFor="let category of categories()" [value]="category.id">
-      {{ category.name }}
-    </option>
-  </select>
-</div>
