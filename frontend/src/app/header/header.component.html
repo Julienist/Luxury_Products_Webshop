@@ -5,6 +5,7 @@
     <li><a routerLink="/cart">{{ 'header.cart' | translate }}</a></li>
     <li><a routerLink="/register">{{ 'header.reg' | translate }}</a></li>
     <li><a (click)="goToUser(userService.getUserId())">{{ 'header.user' | translate }}</a></li>
+    <li *ngIf="isAdmin()"><a routerLink="/adminpanel">{{ 'header.admin-pan' | translate }}</a></li>
   </ul>
   <button (click)="logout()">Logout</button>
 </nav>

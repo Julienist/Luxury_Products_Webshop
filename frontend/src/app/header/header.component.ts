@@ -11,7 +11,8 @@ import {SwitchLanguageComponent} from '../switch-language/switch-language.compon
   imports: [
     RouterModule,
     TranslateModule,
-    SwitchLanguageComponent
+    SwitchLanguageComponent,
+    NgIf
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
@@ -22,12 +23,16 @@ export class HeaderComponent {
 
   protected logout(): void {
     this.userService.logout();
-    localStorage.removeItem('authToken');
     this.router.navigate(['/register']);
   }
 
   protected goToUser(userId: string | null): void{
     this.router.navigate(['/user/' + userId]);
+  }
+
+  protected isAdmin(): boolean {
+    const roles = this.userService.getUserRoles();
+    return roles.includes('Admin');
   }
 
 }

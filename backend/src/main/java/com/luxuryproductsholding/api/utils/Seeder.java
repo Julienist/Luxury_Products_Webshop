@@ -79,36 +79,44 @@ public class Seeder {
         roleRepository.save(new Role("ROLE_IT_DEV"));
         roleRepository.save(new Role("ROLE_KLANTENSERVICE"));
         roleRepository.save(new Role("ROLE_JURIDISCH"));
+        roleRepository.save(new Role("Admin"));
     }
 
     public void seedAdminUser() {
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
         CustomUser ceo = new CustomUser("eijckdom.r@luxuryproductsholding.com", encoder.encode("FaultyPassword!123"));
+        ceo.getRoles().add(roleRepository.findByName("Admin"));
         ceo.getRoles().add(roleRepository.findByName("ROLE_CEO"));
         userRepository.save(ceo);
 
         CustomUser cfo = new CustomUser("koers.s@luxuryproductsholding.com", encoder.encode("Password1234#"));
+        cfo.getRoles().add(roleRepository.findByName("Admin"));
         cfo.getRoles().add(roleRepository.findByName("ROLE_CFO"));
         userRepository.save(cfo);
 
         CustomUser ecommerce = new CustomUser("visser.c@luxuryproductsholding.com", encoder.encode("Password1235#"));
+        ecommerce.getRoles().add(roleRepository.findByName("Admin"));
         ecommerce.getRoles().add(roleRepository.findByName("ROLE_ECOMMERCE"));
         userRepository.save(ecommerce);
 
         CustomUser marketing = new CustomUser("mulder.j@luxuryproductsholding.com", encoder.encode("Password1236#"));
+        marketing.getRoles().add(roleRepository.findByName("Admin"));
         marketing.getRoles().add(roleRepository.findByName("ROLE_MARKETING"));
         userRepository.save(marketing);
 
         CustomUser it = new CustomUser("hermans.e@luxuryproductsholding.com", encoder.encode("Password1237#"));
+        it.getRoles().add(roleRepository.findByName("Admin"));
         it.getRoles().add(roleRepository.findByName("ROLE_IT_DEV"));
         userRepository.save(it);
 
         CustomUser klantenservice = new CustomUser("jansen.s@luxuryproductsholding.com", encoder.encode("Password1238#"));
+        klantenservice.getRoles().add(roleRepository.findByName("Admin"));
         klantenservice.getRoles().add(roleRepository.findByName("ROLE_KLANTENSERVICE"));
         userRepository.save(klantenservice);
 
         CustomUser juridisch = new CustomUser("karim.n@luxuryproductsholding.com", encoder.encode("Password1239#"));
+        juridisch.getRoles().add(roleRepository.findByName("Admin"));
         juridisch.getRoles().add(roleRepository.findByName("ROLE_JURIDISCH"));
         userRepository.save(juridisch);
     }
