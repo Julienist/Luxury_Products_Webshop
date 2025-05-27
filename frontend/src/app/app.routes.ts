@@ -9,7 +9,13 @@ import {ProductDetailComponent} from './product-list/product-details/product-det
 import {UserComponent} from './user/user.component';
 import {authGuard} from './auth.guard';
 import {AdminpaneelComponent} from "./adminpaneel/adminpaneel.component";
-import {adminGuard} from "./services/admin.guard";
+import {
+  adminGuard,
+  hasInsightRights,
+  hasMakeDeactivateRights,
+  hasUsageInsightsRights,
+  superAdminGuard
+} from "./services/admin.guard";
 
 export const routes: Routes = [
   {
@@ -49,5 +55,23 @@ export const routes: Routes = [
     path: 'adminpanel',
     component: AdminpaneelComponent,
     canActivate: [adminGuard]
+  },
+  {
+    path: 'make_promocode',
+    canActivate: [superAdminGuard, hasMakeDeactivateRights],
+  },
+  {
+    path: 'insight_all_promocodes',
+    canActivate: [superAdminGuard, hasInsightRights],
+  },
+  {
+    path: 'insight_all_active_promocodes',
+    canActivate: [superAdminGuard, hasInsightRights, hasUsageInsightsRights],
+  },
+  {
+    path: 'deactivate_promocodes',
+    canActivate: [superAdminGuard, hasMakeDeactivateRights],
   }
+
+
 ];
