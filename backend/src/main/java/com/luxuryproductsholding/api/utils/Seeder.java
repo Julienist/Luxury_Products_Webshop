@@ -79,7 +79,20 @@ public class Seeder {
         roleRepository.save(new Role("ROLE_IT_DEV"));
         roleRepository.save(new Role("ROLE_KLANTENSERVICE"));
         roleRepository.save(new Role("ROLE_JURIDISCH"));
+
+        // Voeg de algemene 'Admin' rol toe
+        // admin, heeft op z'n minst toegang tot admin paneel op frontend.
+        // SuperAdmin, heeft toegang tot alle admin functies op frontend.
+
+        // exotische rollen:
+        // All_insights, heeft toegang tot alle insights pagina's op frontend.
+        // Make_and_deactivate_promocodes, heeft toegang tot de pagina om promotiecodes te maken en te deactiveren.
+        // Insight_promocode_usage, heeft toegang tot de pagina om het gebruik van promotiecodes te bekijken.
         roleRepository.save(new Role("Admin"));
+        roleRepository.save(new Role("SuperAdmin"));
+        roleRepository.save(new Role("All_insights"));
+        roleRepository.save(new Role("Make_and_deactivate_promocodes"));
+        roleRepository.save(new Role("Insight_promocode_usage"));
     }
 
     public void seedAdminUser() {
@@ -87,36 +100,43 @@ public class Seeder {
 
         CustomUser ceo = new CustomUser("eijckdom.r@luxuryproductsholding.com", encoder.encode("FaultyPassword!123"));
         ceo.getRoles().add(roleRepository.findByName("Admin"));
+        ceo.getRoles().add(roleRepository.findByName("SuperAdmin"));
         ceo.getRoles().add(roleRepository.findByName("ROLE_CEO"));
         userRepository.save(ceo);
 
         CustomUser cfo = new CustomUser("koers.s@luxuryproductsholding.com", encoder.encode("Password1234#"));
         cfo.getRoles().add(roleRepository.findByName("Admin"));
+        cfo.getRoles().add(roleRepository.findByName("All_insights"));
         cfo.getRoles().add(roleRepository.findByName("ROLE_CFO"));
         userRepository.save(cfo);
 
         CustomUser ecommerce = new CustomUser("visser.c@luxuryproductsholding.com", encoder.encode("Password1235#"));
         ecommerce.getRoles().add(roleRepository.findByName("Admin"));
+        ecommerce.getRoles().add(roleRepository.findByName("Make_and_deactivate_promocodes"));
         ecommerce.getRoles().add(roleRepository.findByName("ROLE_ECOMMERCE"));
         userRepository.save(ecommerce);
 
         CustomUser marketing = new CustomUser("mulder.j@luxuryproductsholding.com", encoder.encode("Password1236#"));
         marketing.getRoles().add(roleRepository.findByName("Admin"));
+        marketing.getRoles().add(roleRepository.findByName("Insight_promocode_usage"));
         marketing.getRoles().add(roleRepository.findByName("ROLE_MARKETING"));
         userRepository.save(marketing);
 
         CustomUser it = new CustomUser("hermans.e@luxuryproductsholding.com", encoder.encode("Password1237#"));
         it.getRoles().add(roleRepository.findByName("Admin"));
+        it.getRoles().add(roleRepository.findByName("SuperAdmin"));
         it.getRoles().add(roleRepository.findByName("ROLE_IT_DEV"));
         userRepository.save(it);
 
         CustomUser klantenservice = new CustomUser("jansen.s@luxuryproductsholding.com", encoder.encode("Password1238#"));
         klantenservice.getRoles().add(roleRepository.findByName("Admin"));
+        klantenservice.getRoles().add(roleRepository.findByName("Insight_promocode_usage"));
         klantenservice.getRoles().add(roleRepository.findByName("ROLE_KLANTENSERVICE"));
         userRepository.save(klantenservice);
 
         CustomUser juridisch = new CustomUser("karim.n@luxuryproductsholding.com", encoder.encode("Password1239#"));
         juridisch.getRoles().add(roleRepository.findByName("Admin"));
+        juridisch.getRoles().add(roleRepository.findByName("Insight_promocode_usage"));
         juridisch.getRoles().add(roleRepository.findByName("ROLE_JURIDISCH"));
         userRepository.save(juridisch);
     }

@@ -52,6 +52,12 @@
     "admin-pan": "Admin-Panel",
     "user": "Mein Konto"
   },
+  "adminpan": {
+    "make_promoc": "Mache einen Promo-Code",
+    "see_all_promoc": "Alle Promo-Codes ansehen",
+    "see_all_act_promoc": "Alle aktiven Promo-Codes ansehen",
+    "deact_promoc": "Deaktiviere Promo-Code"
+  },
   "footer": {
     "copyright": "© 2025 Luxury Products"
   },

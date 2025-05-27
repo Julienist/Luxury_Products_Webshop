@@ -52,6 +52,12 @@
     "admin-pan": "Admin paneel",
     "user": "Mijn account"
   },
+  "adminpan": {
+    "make_promoc": "Maak een promotiecode",
+    "see_all_promoc": "Bekijk alle promotiecodes",
+    "see_all_act_promoc": "Bekijk alle actieve promotiecodes",
+    "deact_promoc": "Deactiveer promotiecode"
+  },
   "footer": {
     "copyright": "© 2025 Luxury Products"
   },
