@@ -9,6 +9,7 @@ import {ProductDetailComponent} from './product-list/product-details/product-det
 import {UserComponent} from './user/user.component';
 import {authGuard} from './auth.guard';
 import {AdminpaneelComponent} from "./adminpaneel/adminpaneel.component";
+import {MakePromocodePageComponent} from "./make-promocode-page/make-promocode-page.component";
 import {
   adminGuard,
   hasInsightRights,
@@ -59,19 +60,25 @@ export const routes: Routes = [
   {
     path: 'make_promocode',
     canActivate: [superAdminGuard, hasMakeDeactivateRights],
+    component: MakePromocodePageComponent
   },
-  {
-    path: 'insight_all_promocodes',
-    canActivate: [superAdminGuard, hasInsightRights],
-  },
-  {
-    path: 'insight_all_active_promocodes',
-    canActivate: [superAdminGuard, hasInsightRights, hasUsageInsightsRights],
-  },
-  {
-    path: 'deactivate_promocodes',
-    canActivate: [superAdminGuard, hasMakeDeactivateRights],
-  }
+  // gecommenteerde routes zijn voor als maken van promotiecode mogelijk is.
+  // {
+  //   path: 'insight_all_promocodes',
+  //   redirectTo: 'insight_all_promocodes',
+  //   canActivate: [superAdminGuard, hasInsightRights],
+  // },
+  // {
+  //   path: 'insight_all_active_promocodes',
+  //   redirectTo: 'insight_all_active_promocodes',
+  //   canActivate: [superAdminGuard, hasInsightRights, hasUsageInsightsRights]
+  //
+  // },
+  // {
+  //   path: 'deactivate_promocodes',
+  //   redirectTo: 'deactivate_promocodes',
+  //   canActivate: [superAdminGuard, hasMakeDeactivateRights]
+  // }
 
 
 ];
