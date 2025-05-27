@@ -41,6 +41,11 @@ export class UserService {
     return localStorage.getItem(this.authTokenKey);
   }
 
+  public getUserRoles(): string[] {
+    const roles = localStorage.getItem('userRoles');
+    return roles ? JSON.parse(roles) : [];
+  }
+
 
   public logout(): void {
     this.removeShoppingCartFromLocalStorage();
@@ -83,7 +88,7 @@ export class UserService {
     localStorage.setItem('userEmail', email);
   }
 
-  mapAndStoreRoles(roles: UserRole[]): void {
+  public mapAndStoreRoles(roles: UserRole[]): void {
     this.userRoles = roles.map(role => role.name);
     localStorage.setItem('userRoles', JSON.stringify(this.userRoles));
   }
