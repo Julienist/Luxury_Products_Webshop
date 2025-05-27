@@ -3,6 +3,7 @@ import {BehaviorSubject, catchError, map, Observable} from 'rxjs';
 import {CustomUser} from '../models/CustomUser';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
+import {UserRole} from "../models/ResponseAuthData";
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class UserService {
   private roleKey = 'role';
   private userIdKey = 'loggedInUserId';
   private apiUrl = environment.baseApiUrl;
+  private userRoles: string[] = [];
 
 
   private loggedInSubject = new BehaviorSubject<boolean>(this.hasValidToken());
@@ -41,9 +43,21 @@ export class UserService {
 
 
   public logout(): void {
+    this.removeShoppingCartFromLocalStorage();
     localStorage.removeItem('loggedInUserId');
     localStorage.removeItem('role');
+    localStorage.removeItem(this.authTokenKey);
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('userRoles');
     this.loggedInSubject.next(false);
+  }
+
+  private removeShoppingCartFromLocalStorage(): void {
+    const userId = localStorage.getItem(this.userIdKey);
+    if (userId) {
+      const cartKey = `shoppingCart_${userId}`;
+      localStorage.removeItem(cartKey);
+    }
   }
 
   public hasValidToken(): boolean {
@@ -67,6 +81,11 @@ export class UserService {
 
   public saveUserEmailInLocalStorage(email: string): void {
     localStorage.setItem('userEmail', email);
+  }
+
+  mapAndStoreRoles(roles: UserRole[]): void {
+    this.userRoles = roles.map(role => role.name);
+    localStorage.setItem('userRoles', JSON.stringify(this.userRoles));
   }
 
 }

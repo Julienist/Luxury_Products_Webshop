@@ -12,6 +12,8 @@ export class LoginService {
   private httpClient = inject(HttpClient);
   private userService = inject(UserService);
   private authTokenKey = 'authToken';
+  private loggedIn: boolean = false;
+  private token: string | null = null;
 
   private loggedInSubject = new BehaviorSubject<boolean>(this.userService.hasValidToken());
 
@@ -22,15 +24,16 @@ export class LoginService {
     ).pipe(
       tap(resData => {
         if (resData.token) {
-          this.saveTokenInLocalStorage(resData.token);
+          this.loggedIn = true;
+          this.userService.saveUserEmailInLocalStorage(resData.email);
+          this.userService.saveTokenInLocalStorage(resData.token);
           this.loggedInSubject.next(true);
+          if (resData.roles) {
+            this.userService.mapAndStoreRoles(resData.roles);
+          }
         }
       })
     );
-  }
-
-  private saveTokenInLocalStorage(token: string): void {
-    localStorage.setItem(this.authTokenKey, token);
   }
 
 }

@@ -2,10 +2,12 @@ package com.luxuryproductsholding.api.utils;
 
 import com.luxuryproductsholding.api.DAO.CategoryRepository;
 import com.luxuryproductsholding.api.DAO.ProductRepository;
+import com.luxuryproductsholding.api.DAO.RoleRepository;
 import com.luxuryproductsholding.api.DAO.UserRepository;
 import com.luxuryproductsholding.api.models.Category;
 import com.luxuryproductsholding.api.models.CustomUser;
 import com.luxuryproductsholding.api.models.Product;
+import com.luxuryproductsholding.api.models.Role;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,17 +19,21 @@ public class Seeder {
     private ProductRepository productRepository;
     private CategoryRepository categoryRepository;
     private UserRepository userRepository;
+    private RoleRepository roleRepository;
 
     public Seeder(ProductRepository productRepository, CategoryRepository categoryRepository,
-                  UserRepository userRepository) {
+                  UserRepository userRepository, RoleRepository roleRepository) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @EventListener
     public void seed(ContextRefreshedEvent event) {
         seedCategoriesAndProducts();
+        seedRoles();
+        seedAdminUser();
     }
 
     private void seedCategoriesAndProducts() {
@@ -62,5 +68,48 @@ public class Seeder {
         this.productRepository.save(product8);
         this.productRepository.save(product9);
         this.productRepository.save(product10);
+    }
+
+    private void seedRoles() {
+        // Voeg unieke rollen toe
+        roleRepository.save(new Role("ROLE_CEO"));
+        roleRepository.save(new Role("ROLE_CFO"));
+        roleRepository.save(new Role("ROLE_ECOMMERCE"));
+        roleRepository.save(new Role("ROLE_MARKETING"));
+        roleRepository.save(new Role("ROLE_IT_DEV"));
+        roleRepository.save(new Role("ROLE_KLANTENSERVICE"));
+        roleRepository.save(new Role("ROLE_JURIDISCH"));
+    }
+
+    public void seedAdminUser() {
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+        CustomUser ceo = new CustomUser("eijckdom.r@luxuryproductsholding.com", encoder.encode("FaultyPassword!123"));
+        ceo.getRoles().add(roleRepository.findByName("ROLE_CEO"));
+        userRepository.save(ceo);
+
+        CustomUser cfo = new CustomUser("koers.s@luxuryproductsholding.com", encoder.encode("Password1234#"));
+        cfo.getRoles().add(roleRepository.findByName("ROLE_CFO"));
+        userRepository.save(cfo);
+
+        CustomUser ecommerce = new CustomUser("visser.c@luxuryproductsholding.com", encoder.encode("Password1235#"));
+        ecommerce.getRoles().add(roleRepository.findByName("ROLE_ECOMMERCE"));
+        userRepository.save(ecommerce);
+
+        CustomUser marketing = new CustomUser("mulder.j@luxuryproductsholding.com", encoder.encode("Password1236#"));
+        marketing.getRoles().add(roleRepository.findByName("ROLE_MARKETING"));
+        userRepository.save(marketing);
+
+        CustomUser it = new CustomUser("hermans.e@luxuryproductsholding.com", encoder.encode("Password1237#"));
+        it.getRoles().add(roleRepository.findByName("ROLE_IT_DEV"));
+        userRepository.save(it);
+
+        CustomUser klantenservice = new CustomUser("jansen.s@luxuryproductsholding.com", encoder.encode("Password1238#"));
+        klantenservice.getRoles().add(roleRepository.findByName("ROLE_KLANTENSERVICE"));
+        userRepository.save(klantenservice);
+
+        CustomUser juridisch = new CustomUser("karim.n@luxuryproductsholding.com", encoder.encode("Password1239#"));
+        juridisch.getRoles().add(roleRepository.findByName("ROLE_JURIDISCH"));
+        userRepository.save(juridisch);
     }
 }

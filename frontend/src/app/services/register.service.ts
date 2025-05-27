@@ -13,7 +13,6 @@ export class RegistrationService {
   private httpClient = inject(HttpClient);
   private userService = inject(UserService);
   private loggedIn: boolean = false;
-  private userRoles: string[] = [];
   private token: string | null = null;
 
   constructor() {
@@ -28,14 +27,14 @@ export class RegistrationService {
       environment.baseApiUrl + '/auth/register',
       registerData
     ).pipe(
-      tap(resData => {
+        tap(resData => {
         if (resData.token) {
           this.loggedIn = true;
           this.token = resData.token;
           this.userService.saveTokenInLocalStorage(resData.token);
           this.userService.saveUserEmailInLocalStorage(resData.email);
           if (resData.roles) {
-            this.mapAndStoreRoles(resData.roles);
+            this.userService.mapAndStoreRoles(resData.roles);
           }
         }
       },
@@ -50,10 +49,5 @@ export class RegistrationService {
 
   private loadTokenFromLocalStorage(){
     this.token = localStorage.getItem('authToken');
-  }
-
-  private mapAndStoreRoles(roles: UserRole[]): void {
-    this.userRoles = roles.map(role => role.name);
-    localStorage.setItem('userRoles', JSON.stringify(this.userRoles));
   }
 }
