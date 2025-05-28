@@ -58,6 +58,28 @@
     "see_all_act_promoc": "Bekijk alle actieve promotiecodes",
     "deact_promoc": "Deactiveer promotiecode"
   },
+  "make_promoc_page": {
+    "codequestion": "Wat is de promotiecode?",
+    "examplecode": "Bijv. LUXURY2025",
+    "coderequirederror": "Promotiecode is verplicht",
+    "what_does_the_promocode_depend_on": "Heeft promocode betrekking op",
+    "category_text": "Categorie",
+    "product_text": "Product",
+    "select_cat_text": "Selecteer een categorie",
+    "category": "categorie",
+    "select_prod_text": "Selecteer een product",
+    "product": "product",
+    "Discount_Type_text": "Kortingstype",
+    "percentage": "Percentage",
+    "fixedamount": "Vast bedrag",
+    "discount": "Korting (%)",
+    "discount_fixed_amount": "Vast bedrag (€)",
+    "min_order_amount": "Minimum bestelbedrag (€)",
+    "max_times_use_per_user_text": "Maximaal aantal keer per gebruiker",
+    "expirationdate": "Vervaldatum",
+    "make_promoc": "Maak promocode",
+    "cancel": "Annuleer en ga terug"
+  },
   "return": "Ga terug",
   "footer": {
     "copyright": "© 2025 Luxury Products"

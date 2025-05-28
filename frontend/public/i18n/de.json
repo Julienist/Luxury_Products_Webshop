@@ -58,6 +58,28 @@
     "see_all_act_promoc": "Alle aktiven Promo-Codes ansehen",
     "deact_promoc": "Deaktiviere Promo-Code"
   },
+  "make_promoc_page": {
+    "codequestion": "Was ist der Promo-Code?",
+    "examplecode": "z.B. LUXURY2025",
+    "coderequirederror": "Promo-Code ist erforderlich",
+    "what_does_the_promocode_depend_on": "Hängt der Promo-Code ab von",
+    "category_text": "Kategorie",
+    "product_text": "Produkt",
+    "select_cat_text": "Wähle eine Kategorie",
+    "category": "Kategorie",
+    "select_prod_text": "Wähle ein Produkt",
+    "product": "Produkt",
+    "Discount_Type_text": "Rabattart",
+    "percentage": "Prozentsatz",
+    "fixedamount": "Fester Betrag",
+    "discount": "Rabatt (%)",
+    "discount_fixed_amount": "Fester Betrag (€)",
+    "min_order_amount": "Mindestbestellwert (€)",
+    "max_times_use_per_user_text": "Maximale Nutzung pro Benutzer",
+    "expirationdate": "Ablaufdatum",
+    "make_promoc": "Promo-Code erstellen",
+    "cancel": "Abbrechen und zurückgehen"
+  },
   "return": "gehe zurück",
   "footer": {
     "copyright": "© 2025 Luxury Products"

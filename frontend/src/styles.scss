@@ -58,3 +58,6 @@ html, body {
   transform: scale(1.03);
   box-shadow: 5px 5px 0px #3a3a3a;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

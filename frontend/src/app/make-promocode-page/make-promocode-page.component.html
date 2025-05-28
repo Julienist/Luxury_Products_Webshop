@@ -1,1 +1,79 @@
-<button (click)="onReturn()">{{ 'return' | translate }}</button>
+<form [formGroup]="promocodeForm" (ngSubmit)="submit()" class="promo-form">
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>{{ 'make_promoc_page.codequestion' | translate }}</mat-label>
+        <input matInput formControlName="code" placeholder="{{ 'make_promoc_page.examplecode' | translate }}" />
+        <mat-error *ngIf="promocodeForm.get('code')?.hasError('required')">
+            {{ 'make_promoc_page.coderequirederror' | translate }}
+        </mat-error>
+    </mat-form-field>
+
+    <!-- Scope select -->
+    <mat-label class="button_label_text">{{ 'make_promoc_page.what_does_the_promocode_depend_on' | translate }}</mat-label>
+    <div class="btn-group">
+        <button mat-raised-button color="primary" (click)="selectScopeType('CATEGORY')">{{ 'make_promoc_page.category_text' | translate }}</button>
+        <button mat-raised-button color="accent" (click)="selectScopeType('PRODUCT')">{{ 'make_promoc_page.product_text' | translate }}</button>
+    </div>
+
+    <div *ngIf="selectScope === 'CATEGORY'">
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>{{ 'make_promoc_page.select_cat_text' | translate }}</mat-label>
+            <mat-select formControlName="scopeValue">
+                <mat-option *ngFor="let cat of categoriesList" [value]="cat.id">{{ cat.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="selectScope === 'PRODUCT'">
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>{{ 'make_promoc_page.select_prod_text' | translate }}</mat-label>
+            <mat-select formControlName="scopeValue">
+                <mat-option *ngFor="let prod of productsList" [value]="prod.id">{{ prod.name }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <!-- Discount type -->
+    <mat-label class="button_label_text">{{ 'make_promoc_page.Discount_Type_text' | translate }}</mat-label>
+    <div class="btn-group">
+        <button mat-raised-button color="primary" (click)="selectDiscountType('PERCENTAGE')">{{ 'make_promoc_page.percentage' | translate }}</button>
+        <button mat-raised-button color="accent" (click)="selectDiscountType('FIXED')">{{ 'make_promoc_page.fixedamount' | translate }}</button>
+    </div>
+
+    <div *ngIf="selectType === 'PERCENTAGE'">
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>{{ 'make_promoc_page.discount' | translate }}</mat-label>
+            <input matInput type="number" formControlName="discountValue" min="0" max="100" />
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="selectType === 'FIXED'">
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>{{ 'make_promoc_page.discount_fixed_amount' | translate }}</mat-label>
+            <input matInput type="number" formControlName="discountValue" min="0" />
+        </mat-form-field>
+    </div>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>{{ 'make_promoc_page.min_order_amount' | translate }}</mat-label>
+        <input matInput type="number" formControlName="minOrderAmount" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>{{ 'make_promoc_page.max_times_use_per_user_text' | translate }}</mat-label>
+        <input matInput type="number" formControlName="maxUsesPerUser" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>{{ 'make_promoc_page.expirationdate' | translate }}</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="expiryDate" />
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <!-- Actieknoppen -->
+    <div class="btn-group">
+        <button mat-flat-button color="primary" type="submit" [disabled]="promocodeForm.invalid">{{ 'make_promoc_page.make_promoc' | translate }}</button>
+        <button mat-flat-button color="warn" type="button" (click)="cancel(); onReturn()">{{ 'make_promoc_page.cancel' | translate }}</button>
+    </div>
+</form>
