@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {TranslatePipe} from "@ngx-translate/core";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
@@ -10,6 +10,8 @@ import {MatInputModule} from "@angular/material/input";
 import {ProductService} from "../services/product.service";
 import {CategoryService} from "../services/category.service";
 import {NgForOf, NgIf} from "@angular/common";
+import {PromocodeRequest} from "../models/PromocodeRequest";
+import {PromocodeService} from "../services/promocode.service";
 
 @Component({
   selector: 'app-make-promocode-page',
@@ -27,24 +29,17 @@ import {NgForOf, NgIf} from "@angular/common";
   templateUrl: './make-promocode-page.component.html',
   styleUrl: './make-promocode-page.component.scss'
 })
-export class MakePromocodePageComponent {
+export class MakePromocodePageComponent implements OnInit {
     private router = inject(Router);
     private productService = inject(ProductService);
     private categoryService = inject(CategoryService);
+    private promocodeService = inject(PromocodeService);
     private fb = inject(FormBuilder);
 
     public categoriesList: any[] = [];
     public productsList: any[] = [];
 
-    // public products = this.productService.loadProducts();
-    // public categories = this.categoryService.loadCategories();
-
-    // categories: string[] = ['test1', 'test2']; // of bijvoorbeeld ['Drank', 'Eten']
-    // products: string[] = [];   // of bijvoorbeeld ['Product1', 'Product2']
-
     promocodeForm!: FormGroup;
-
-
 
     selectScope: 'CATEGORY' | 'PRODUCT' | null = null;
     selectType: 'PERCENTAGE' | 'FIXED' | null = null;
@@ -60,14 +55,14 @@ export class MakePromocodePageComponent {
         });
 
         this.promocodeForm = this.fb.group({
-            code: ['', Validators.required],
+            code: ['', Validators.required, Validators.pattern('^[a-zA-Z0-9_-]+$'),Validators.minLength(3)],
             scopeType: ['', Validators.required],
             scopeValue: ['', Validators.required],
             discountType: ['', Validators.required],
-            discountValue: [null, [Validators.required, Validators.min(0)]],
+            discountValue: [null, [Validators.required, Validators.min(0), Validators.max(100), Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$')]],
             minOrderAmount: [null, [Validators.required, Validators.min(0)]],
             maxUsesPerUser: [null, [Validators.min(1)]],
-            expiryDate: ['', Validators.required]
+            expiryDate: ['', Validators.required, Validators.pattern('^(0[1-9]|1[0-2])/(20)?[0-9]{2}$'), Validators.minLength(5)],
         });
     }
 
@@ -82,10 +77,18 @@ export class MakePromocodePageComponent {
         this.promocodeForm.patchValue({ discountType: type });
     }
 
-    submit() {
+    protected submitPromocode(): void {
         if (this.promocodeForm.valid) {
-            console.log('Promocode aangemaakt:', this.promocodeForm.value);
-            // Call API / Service hier
+            const promocodeData = this.promocodeForm.value as PromocodeRequest;
+            this.promocodeService.createPromocode(promocodeData).subscribe({
+                next: (response) => {
+                    console.log('Promocode created successfully:', response);
+                    this.onReturn();
+                },
+                error: (error) => {
+                    console.error('Error creating promocode:', error);
+                }
+            });
         } else {
             this.promocodeForm.markAllAsTouched();
         }
