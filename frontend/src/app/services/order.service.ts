@@ -5,7 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {ResponseOrderData} from '../models/ResponseOrderData';
 import {Order} from '../models/Order';
 import {environment} from '../../environments/environment';
-import {catchError} from 'rxjs';
+import {catchError, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class OrderService {
   private httpClient = inject(HttpClient);
   private cartService = inject(ShoppingCartService);
 
-  public createOrder(userId: number, shippingAddress: string) {
+  public createOrder(userId: number, shippingAddress: string): Observable<ResponseOrderData> {
     const cartItems = this.cartService.getCart()();
 
     const orderData: OrderRequest = {
@@ -34,7 +34,7 @@ export class OrderService {
       orderData);
   }
 
-  public fetchOrdersByUserId(userId: string | null){
+  public fetchOrdersByUserId(userId: string | null): Observable<Order[]> {
     const apiUrl = environment.baseApiUrl + `/orders/${userId}`;
     return this.httpClient.get<Order[]>(apiUrl);
   }
