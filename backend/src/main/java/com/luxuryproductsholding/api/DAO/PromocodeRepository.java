@@ -7,4 +7,6 @@ public interface PromocodeRepository extends JpaRepository<Promocode, Long> {
     Promocode findByCode(String code);
     Promocode findByCodeAndActiveTrue(String code);
     Promocode findByCodeAndActiveFalse(String code);
+
+    boolean existsByCode(String code);
 }

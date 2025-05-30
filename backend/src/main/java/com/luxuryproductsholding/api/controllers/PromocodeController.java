@@ -23,9 +23,8 @@ public class PromocodeController {
     @PostMapping
     public ResponseEntity<String> createPromocode(@RequestBody PromocodeRequest promocodeRequest) {
         try {
-            promocodeService.getPromocodeByCode(promocodeRequest.getCode());
-//            promocodeService.validatePromocode(promocodeRequest);
-            return ResponseEntity.ok("Promocode is valid.");
+            promocodeService.createPromocodeAfterValidation(promocodeRequest);
+            return ResponseEntity.ok("Promocode is valid and created.");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

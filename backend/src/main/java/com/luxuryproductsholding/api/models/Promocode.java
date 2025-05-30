@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Setter
@@ -22,8 +23,8 @@ public class Promocode {
     private String code;
 
     private boolean active;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private LocalDateTime creationDate;
+    private LocalDateTime expiryDate;
 
     @Enumerated(EnumType.STRING)
     private DiscountType discountType; // PERCENTAGE, FIXED_AMOUNT
@@ -32,7 +33,7 @@ public class Promocode {
 
     private BigDecimal minimumOrderAmount;
 
-    private Integer maxUsesTotal;
+    private Integer usedCount; // Tracks how many times the promocode has been used
     private Integer maxUsesPerEmail;
 
     @ManyToMany
@@ -40,6 +41,20 @@ public class Promocode {
 
     @ManyToMany
     private Set<Category> applicableCategories;
+
+    public Promocode(String code, boolean active, LocalDate creationDate, LocalDate expiryDate, DiscountType discountType, BigDecimal discountValue, BigDecimal minimumOrderAmount, Integer usedCount, Integer maxUsesPerEmail, Set<Product> applicableProducts, Set<Category> applicableCategories) {
+        this.code = code;
+        this.active = active;
+        this.creationDate = creationDate.atStartOfDay();
+        this.expiryDate = expiryDate.atStartOfDay();
+        this.discountType = discountType;
+        this.discountValue = discountValue;
+        this.minimumOrderAmount = minimumOrderAmount;
+        this.usedCount = usedCount;
+        this.maxUsesPerEmail = maxUsesPerEmail;
+        this.applicableProducts = applicableProducts;
+        this.applicableCategories = applicableCategories;
+    }
 
     // Logging komt in een aparte table
 }

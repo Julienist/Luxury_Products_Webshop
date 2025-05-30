@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Setter
 @Getter
@@ -16,7 +17,8 @@ public class PromocodeUsageLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String email;
+    @ManyToOne
+    private CustomUser user;
 
     private LocalDateTime usedAt;
 

@@ -16,12 +16,13 @@ public class PercentageDiscountStrategy implements DiscountCalculator {
         return promocode.getDiscountType() == DiscountType.PERCENTAGE;
     }
 
-    @Override
+//    @Override
     public BigDecimal calculateDiscount(Promocode promocode, Order order) {
-        BigDecimal discount = order.getTotalAmount()
-                .multiply(promocode.getDiscountValue())
-                .divide(BigDecimal.valueOf(100));
-        return discount.min(order.getTotalAmount()); // nooit meer dan totaalbedrag
+//        BigDecimal discount = order.getTotalAmount()
+//                .multiply(promocode.getDiscountValue())
+//                .divide(BigDecimal.valueOf(100));
+//        return discount.min(order.getTotalAmount()); // nooit meer dan totaalbedrag
+        return null; // even snelle fix
     }
 }
 
