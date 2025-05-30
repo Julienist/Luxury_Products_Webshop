@@ -19,7 +19,7 @@
         <mat-form-field appearance="fill" class="full-width">
             <mat-label>{{ 'make_promoc_page.select_cat_text' | translate }}</mat-label>
             <mat-select formControlName="scopeValue">
-                <mat-option *ngFor="let cat of categoriesList" [value]="cat.id">{{ cat.name }}</mat-option>
+                <mat-option *ngFor="let cat of categoriesList" [value]="cat.name">{{ cat.name }}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>
@@ -28,7 +28,7 @@
         <mat-form-field appearance="fill" class="full-width">
             <mat-label>{{ 'make_promoc_page.select_prod_text' | translate }}</mat-label>
             <mat-select formControlName="scopeValue">
-                <mat-option *ngFor="let prod of productsList" [value]="prod.id">{{ prod.name }}</mat-option>
+                <mat-option *ngFor="let prod of productsList" [value]="prod.name">{{ prod.name }}</mat-option>
             </mat-select>
         </mat-form-field>
     </div>

@@ -55,14 +55,21 @@ export class MakePromocodePageComponent implements OnInit {
         });
 
         this.promocodeForm = this.fb.group({
-            code: ['', Validators.required, Validators.pattern('^[a-zA-Z0-9_-]+$'),Validators.minLength(3)],
+                code: [
+                    '',
+                    [
+                        Validators.required,
+                        Validators.pattern('^[a-zA-Z0-9_-]+$'),
+                        Validators.minLength(3)
+                    ]
+            ],
             scopeType: ['', Validators.required],
             scopeValue: ['', Validators.required],
             discountType: ['', Validators.required],
-            discountValue: [null, [Validators.required, Validators.min(0), Validators.max(100), Validators.pattern('^[0-9]+(\\.[0-9]{1,2})?$')]],
+            discountValue: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
             minOrderAmount: [null, [Validators.required, Validators.min(0)]],
             maxUsesPerUser: [null, [Validators.min(1)]],
-            expiryDate: ['', Validators.required, Validators.pattern('^(0[1-9]|1[0-2])/(20)?[0-9]{2}$'), Validators.minLength(5)],
+            expiryDate: ['', Validators.required],
         });
     }
 
