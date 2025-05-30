@@ -11,7 +11,6 @@ import {SwitchLanguageComponent} from '../switch-language/switch-language.compon
   imports: [
     RouterModule,
     TranslateModule,
-    SwitchLanguageComponent,
     NgIf
   ],
   templateUrl: './header.component.html',

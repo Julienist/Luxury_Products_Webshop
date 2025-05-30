@@ -1,16 +1,14 @@
-import { Component, inject, Input, OnInit, SimpleChanges} from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { Product } from '../../models/Product';
 import { ShoppingCartService } from '../../services/shopping-cart.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
-import { Observable } from 'rxjs';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateModule} from '@ngx-translate/core';
-import {NgIf} from '@angular/common';
 
 @Component({
   selector: 'app-product',
-  imports: [TranslateModule, NgIf],
+  imports: [TranslateModule],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })

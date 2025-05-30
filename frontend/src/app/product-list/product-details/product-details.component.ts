@@ -1,4 +1,4 @@
-import {Component, inject, Input, OnInit, signal} from '@angular/core';
+import {Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/Product';
 import { ProductService } from '../../services/product.service';

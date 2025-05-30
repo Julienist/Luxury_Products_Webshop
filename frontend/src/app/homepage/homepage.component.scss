@@ -1,7 +1,7 @@
-@import "../../styles";
-
+//@import "../../styles";
+@use "../../styles" as styles;
 .home-main {
-  font-family: $retro-font;
+  font-family: styles.$retro-font;
   color: #f0f0f0;
   background: #1c1c1c;
   padding: 40px 10%;

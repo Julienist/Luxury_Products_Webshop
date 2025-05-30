@@ -5,7 +5,7 @@ import {SwitchLanguageComponent} from '../switch-language/switch-language.compon
 
 @Component({
   selector: 'app-homepage',
-  imports: [RouterModule, TranslateModule, SwitchLanguageComponent],
+  imports: [RouterModule, TranslateModule],
   templateUrl: './homepage.component.html',
   styleUrl: './homepage.component.scss'
 })

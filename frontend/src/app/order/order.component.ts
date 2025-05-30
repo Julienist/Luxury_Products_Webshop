@@ -11,7 +11,12 @@ import {UserService} from '../services/user.service';
 
 @Component({
   selector: 'app-order',
-  imports: [FormsModule, RouterModule, ReactiveFormsModule, NgIf, NgFor, TranslateModule],
+  imports: [
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    TranslateModule
+  ],
   templateUrl: './order.component.html',
   styleUrl: './order.component.scss'
 })

@@ -10,7 +10,7 @@ import {SwitchLanguageComponent} from '../switch-language/switch-language.compon
 
 @Component({
   selector: 'app-user',
-  imports: [NgIf, TranslatePipe, NgFor, RouterModule, SwitchLanguageComponent],
+  imports: [NgIf, TranslatePipe, NgFor, RouterModule],
   templateUrl: './user.component.html',
   styleUrl: './user.component.scss'
 })

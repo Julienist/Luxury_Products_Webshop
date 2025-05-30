@@ -3,9 +3,7 @@ import {TranslatePipe, TranslateService} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-switch-language',
-  imports: [
-    TranslatePipe
-  ],
+  imports: [],
   templateUrl: './switch-language.component.html',
   styleUrl: './switch-language.component.scss'
 })

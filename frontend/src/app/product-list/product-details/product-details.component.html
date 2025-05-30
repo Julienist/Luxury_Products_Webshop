@@ -1,12 +1,12 @@
 <div *ngIf="product; else loading" class="product-container">
   <div class="product-image">
-    <img [src]="product?.imageUrl" [alt]="product?.name" />
+    <img [src]="product.imageUrl" [alt]="product.name" />
   </div>
 
   <div class="product-info">
-    <h1 class="product-title">{{ product?.name }}</h1>
-    <p class="product-description">{{ product?.description }}</p>
-    <p class="product-price">{{ 'product.price' | translate }}{{ product?.price }}</p>
+    <h1 class="product-title">{{ product.name }}</h1>
+    <p class="product-description">{{ product.description }}</p>
+    <p class="product-price">{{ 'product.price' | translate }}{{ product.price }}</p>
 
     <button class="buy-button" (click)="addToCart()">{{ 'product.add' | translate }}</button>
 
