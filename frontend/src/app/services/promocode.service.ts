@@ -12,10 +12,11 @@ export class PromocodeService {
 
     private httpClient = inject(HttpClient);
 
-    public createPromocode(promocodeData: PromocodeRequest): Observable<ResponsePromocodeData> {
-        return this.httpClient.post<ResponsePromocodeData>(
+    public createPromocode(promocodeData: PromocodeRequest): Observable<string> {
+        return this.httpClient.post<string>(
             environment.baseApiUrl + '/promocodes',
-            promocodeData
+            promocodeData,
+            { responseType: 'text' as 'json' }
         );
     }
 

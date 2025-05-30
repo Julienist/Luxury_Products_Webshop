@@ -34,4 +34,21 @@ export class CategoryService {
       )
   }
 
+  public async saveCategoriesToCache(categories: Category[]): Promise<void> {
+    const cache = await caches.open('category-cache');
+    const response = new Response(JSON.stringify(categories), {
+      headers: { 'Content-Type': 'application/json' }
+    });
+    await cache.put(this.apiUrl + '/categories', response);
+  }
+
+  public async loadCategoriesFromCache(): Promise<Category[] | null> {
+    const cache = await caches.open('category-cache');
+    const cachedResponse = await cache.match(this.apiUrl + '/categories');
+    if (cachedResponse) {
+      return await cachedResponse.json();
+    }
+    return null;
+  }
+
 }

@@ -12,6 +12,8 @@ import {CategoryService} from "../services/category.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {PromocodeRequest} from "../models/PromocodeRequest";
 import {PromocodeService} from "../services/promocode.service";
+import {Product} from "../models/Product";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-make-promocode-page',
@@ -34,6 +36,7 @@ export class MakePromocodePageComponent implements OnInit {
     private productService = inject(ProductService);
     private categoryService = inject(CategoryService);
     private promocodeService = inject(PromocodeService);
+    private toastrService = inject(ToastrService);
     private fb = inject(FormBuilder);
 
     public categoriesList: any[] = [];
@@ -46,13 +49,32 @@ export class MakePromocodePageComponent implements OnInit {
 
     ngOnInit(): void {
 
-        // ... (form initialization)
-        this.categoryService.loadCategories().subscribe(categories => {
-            this.categoriesList = categories;
-        });
-        this.productService.loadProducts().subscribe(products => {
-            this.productsList = products;
-        });
+        // Load categories from cache first
+        (async (): Promise<void> => {
+            const categories = await this.categoryService.loadCategoriesFromCache();
+            if (!categories || categories.length === 0) {
+                console.warn('No categories found in cache, loading from server.');
+                this.categoryService.loadCategories().subscribe(serverCategories => {
+                    this.categoriesList = serverCategories;
+                    this.categoryService.saveCategoriesToCache(serverCategories);
+                });
+            } else {
+                this.categoriesList = categories;
+            }
+        })();
+
+        // Load products from the product service
+        (async (): Promise<void> => {
+            const products: Product[] | null = await this.productService.loadProductsFromCache();
+            if (!products || products.length === 0) {
+                console.warn('No products found in cache, loading from server.');
+                this.productService.loadProducts().subscribe(serverProducts => {
+                    this.productsList = serverProducts;
+                });
+            } else {
+                this.productsList = products;
+            }
+        })();
 
         this.promocodeForm = this.fb.group({
                 code: [
@@ -68,7 +90,7 @@ export class MakePromocodePageComponent implements OnInit {
             discountType: ['', Validators.required],
             discountValue: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
             minOrderAmount: [null, [Validators.required, Validators.min(0)]],
-            maxUsesPerUser: [null, [Validators.min(1)]],
+            maxUsesPerEmail: [null, [Validators.min(1)]],
             expiryDate: ['', Validators.required],
         });
     }
@@ -89,11 +111,19 @@ export class MakePromocodePageComponent implements OnInit {
             const promocodeData = this.promocodeForm.value as PromocodeRequest;
             this.promocodeService.createPromocode(promocodeData).subscribe({
                 next: (response) => {
-                    console.log('Promocode created successfully:', response);
+                    this.toastrService.success(
+                        `<b>Promocode created successfully:</b> ${JSON.stringify(response)}`,
+                        'Success!',
+                        { toastClass: 'custom-toast-class', enableHtml: true }
+                    );
                     this.onReturn();
                 },
                 error: (error) => {
-                    console.error('Error creating promocode:', error);
+                    this.toastrService.error(
+                        `<b>Error creating promocode:</b> ${error.message || error}`,
+                        'Error!',
+                        { toastClass: 'custom-toast-class', enableHtml: true }
+                    );
                 }
             });
         } else {
