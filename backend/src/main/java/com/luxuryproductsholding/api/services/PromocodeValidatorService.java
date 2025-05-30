@@ -54,8 +54,10 @@ public class PromocodeValidatorService {
         if (code.isEmpty()) {
             throw new IllegalArgumentException("Promocode mag niet leeg zijn.");
         }
-        if (!promocodeRepository.existsByCode(code)) {
-            throw new IllegalArgumentException("Promocode bestaat niet.");
+        if (promocodeRepository.existsByCode(code)) {
+            throw new IllegalArgumentException("Promocode bestaat al.");
+        } else if (code.length() < 3) {
+            throw new IllegalArgumentException("Promocode moet tenminste 3 tekens lang zijn.");
         }
     }
 
