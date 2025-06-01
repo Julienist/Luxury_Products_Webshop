@@ -1,6 +1,4 @@
 @startuml
-'https://plantuml.com/sequence-diagram
-
 autonumber
 
 actor Client
