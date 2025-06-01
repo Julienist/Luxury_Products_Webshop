@@ -1,0 +1,96 @@
+[
+  {
+    "id": 1,
+    "name": "Horloges",
+    "products": [
+      {
+        "id": 1,
+        "name": "Rolex Submariner",
+        "description": "Iconisch duikhorloge met zwarte wijzerplaat en keramische bezel. Een tijdloos statussymbool.",
+        "price": 7999.99,
+        "imageUrl": "https://i0.wp.com/wannabuyawatch.com/wp-content/uploads/2021/03/52078.jpg?fit=960%2C1280&ssl=1"
+      },
+      {
+        "id": 2,
+        "name": "Omega Speedmaster",
+        "description": "De legendarische Moonwatch die gedragen werd tijdens Apollo-missies. Elegant en sportief.",
+        "price": 6299.0,
+        "imageUrl": "https://www.eugenevanbaal.nl/media/catalog/product/cache/4f2c711297192d1e648fdfaf4a68b673/3/2/32930445104001.webp"
+      },
+      {
+        "id": 10,
+        "name": "Tag Heuer Carrera Calibre 5",
+        "description": "Automatisch horloge met sportief design en Zwitserse precisie. Perfect voor dagelijks gebruik.",
+        "price": 2850.0,
+        "imageUrl": "https://chronexttime.imgix.net/V/8/V85849/V85849_1_det.png?w=570&ar=1:1&auto=format&fm=png&q=55&usm=50&usmrad=1.5&dpr=2&trim=color&fit=fill&auto=compress&bg=FFFFFF&bg-remove=true"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Armbanden",
+    "products": [
+      {
+        "id": 3,
+        "name": "Cartier Love Bracelet",
+        "description": "Gouden armband met schroefsysteem. Symbool van eeuwige liefde en toewijding.",
+        "price": 7150.0,
+        "imageUrl": "https://a.1stdibscdn.com/archivesE/upload/j_214/15_15/org_mtsj118232/MTSJ118232_l.jpeg?disable=upscale&auto=webp&quality=60&width=1400"
+      },
+      {
+        "id": 4,
+        "name": "Tiffany & Co. T Wire Bracelet",
+        "description": "Minimalistische armband in 18k goud met iconisch T-ontwerp. Subtiel en stijlvol.",
+        "price": 3450.0,
+        "imageUrl": "https://www.net-a-porter.com/variants/images/17957409494218415/in/w2000_q60.jpg"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Tassen",
+    "products": [
+      {
+        "id": 5,
+        "name": "Louis Vuitton Neverfull MM",
+        "description": "Luxe handtas van gecoat canvas en leer. Ruim, stijlvol en herkenbaar aan het LV-monogram.",
+        "price": 1650.0,
+        "imageUrl": "https://en.louisvuitton.com/images/is/image/lv/1/PP_VP_L/louis-vuitton-neverfull-mm--N40599_PM1_Side%20view.png?wid=2400&hei=2400"
+      },
+      {
+        "id": 6,
+        "name": "Chanel Classic Flap Bag",
+        "description": "Elegante tas met kettingband en quilted leer. Een modeklassieker die nooit uit de mode raakt.",
+        "price": 7950.0,
+        "imageUrl": "https://images.vestiairecollective.com/images/resized/w=1024,q=75,f=auto,/produit/chanel-timeless-classique-leer-zwart-handtas-48641947-1_3.jpg"
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Brillen",
+    "products": [
+      {
+        "id": 7,
+        "name": "Ray-Ban Aviator Gold",
+        "description": "De originele pilotenbril met gouden frame en groene lenzen. Tijdloos design.",
+        "price": 599.0,
+        "imageUrl": "https://grandvision-media.imgix.net/m/6167739297197404/original_png-0RB3025__001_51__STD__shad__qt.png?w=1440&auto=format"
+      },
+      {
+        "id": 8,
+        "name": "Gucci GG0406S",
+        "description": "Statement zonnebril met goudkleurig frame en oversized lenzen. Onmiskenbaar Gucci.",
+        "price": 690.0,
+        "imageUrl": "https://grandvision-media.imgix.net/m/7a7a65e179d137dc/original_png-gucci_gg0121o_8056376076967_00025.png?w=1440&auto=format"
+      },
+      {
+        "id": 9,
+        "name": "Persol PO0714 Folding",
+        "description": "Handgemaakte zonnebril uit Italië, bekend van Steve McQueen. Inklapbaar en stijlvol.",
+        "price": 520.0,
+        "imageUrl": "https://image4.cdnsbg.com/1/73/15835_side_1_1609226326671.jpg?width=900&height=450&q=90"
+      }
+    ]
+  }
+]
