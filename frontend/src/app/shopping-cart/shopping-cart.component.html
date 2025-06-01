@@ -21,7 +21,9 @@
     </div>
 
     <div class="cart-summary" *ngIf="cart().length > 0">
-      <p>Totaal: €{{ getTotalPrice().toFixed(2) }}</p>
+        <p>{{ 'cart.Total_price' | translate }}{{ totalPrice.toFixed(2) }}</p>
+      <input type="text" placeholder="{{ 'cart.promocode' | translate }}" [(ngModel)]="promoCode" class="promo-input" [disabled]="promocodeApplied" >
+      <button class="special-button" (click)="applyPromocode()" [disabled]="promocodeApplied">{{ 'cart.applying_promocode' | translate }}</button>
       <button class="special-button" (click)="clearCart()">{{ 'cart.empty' | translate }}</button>
       <button routerLink="/order" class="special-button">{{ 'cart.checkout' | translate }}</button>
     </div>

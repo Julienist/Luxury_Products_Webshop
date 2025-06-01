@@ -10,7 +10,10 @@
     "empty": "Empty cart",
     "checkout": "Checkout",
     "noCart": "Your cart is empty.",
-    "warning": "Make sure to create an account to save your cart."
+    "warning": "Make sure to create an account to save your cart.",
+    "Total_price": "Total price: €",
+    "promocode": "Promo code",
+    "applying_promocode": "apply your promocode here"
   },
   "product": {
     "buy": "Buy",

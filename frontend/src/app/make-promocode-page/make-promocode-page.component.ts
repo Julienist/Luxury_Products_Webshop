@@ -88,7 +88,7 @@ export class MakePromocodePageComponent implements OnInit {
             scopeType: ['', Validators.required],
             scopeValue: ['', Validators.required],
             discountType: ['', Validators.required],
-            discountValue: [null, [Validators.required, Validators.min(0), Validators.max(100)]],
+            discountValue: [null, [Validators.required, Validators.min(0)]],
             minOrderAmount: [null, [Validators.required, Validators.min(0)]],
             maxUsesPerEmail: [null, [Validators.min(1)]],
             expiryDate: ['', Validators.required],
@@ -114,7 +114,7 @@ export class MakePromocodePageComponent implements OnInit {
                     this.toastrService.success(
                         `<b>Promocode created successfully:</b> ${JSON.stringify(response)}`,
                         'Success!',
-                        { toastClass: 'custom-toast-class', enableHtml: true }
+                        { toastClass: 'custom-toast-class', enableHtml: true, timeOut: 5000 }
                     );
                     this.onReturn();
                 },
@@ -122,7 +122,7 @@ export class MakePromocodePageComponent implements OnInit {
                     this.toastrService.error(
                         `<b>Error creating promocode:</b> ${error.message || error}`,
                         'Error!',
-                        { toastClass: 'custom-toast-class', enableHtml: true }
+                        { toastClass: 'custom-toast-class', enableHtml: true, timeOut: 5000 }
                     );
                 }
             });

@@ -26,6 +26,8 @@ export class OrderComponent {
   private userService = inject(UserService);
   private router = inject(Router);
 
+  private discountValue = this.cartService.getDiscountValue();
+
   protected orderForm = new FormGroup({
     "street": new FormControl("", [Validators.required]),
     "city": new FormControl("", [Validators.required]),
@@ -41,7 +43,7 @@ export class OrderComponent {
 
     const shippingAddress = `${this.orderForm.get('street')?.value} ${this.orderForm.get('city')?.value} ${this.orderForm.get('zip_code')?.value}`;
 
-    this.orderService.createOrder(userIdAsNumber, shippingAddress).subscribe({
+    this.orderService.createOrder(userIdAsNumber, shippingAddress, this.discountValue).subscribe({
       next: (resData) => {
         this.cartService.clearCart();
         this.goToUser(resData.user.id);

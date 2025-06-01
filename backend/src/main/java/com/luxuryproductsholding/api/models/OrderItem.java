@@ -32,9 +32,7 @@ public class OrderItem {
     private BigDecimal price;
 
     public OrderItem(Product product, String productName, int quantity, BigDecimal price) {
-//        this.productId = productId;
         this.product = product;
-
         this.productName = productName;
         this.quantity = quantity;
         this.price = price;

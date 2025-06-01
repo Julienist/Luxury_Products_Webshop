@@ -1,13 +1,16 @@
 package com.luxuryproductsholding.api.services;
 
-import com.luxuryproductsholding.api.DAO.CategoryRepository;
-import com.luxuryproductsholding.api.DAO.ProductRepository;
-import com.luxuryproductsholding.api.DAO.PromocodeRepository;
-import com.luxuryproductsholding.api.DAO.PromocodeUsageLogRepository;
+import com.luxuryproductsholding.api.DAO.*;
+import com.luxuryproductsholding.api.DTO.PromocodeIntermediaryRequest;
 import com.luxuryproductsholding.api.DTO.PromocodeRequest;
+import com.luxuryproductsholding.api.DTO.PromocodeResponse;
 import com.luxuryproductsholding.api.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -17,21 +20,26 @@ public class PromocodeService {
     private final PromocodeUsageLogRepository logRepository;
     private final OrderService orderService;
     private final PromocodeRepository promocodeRepository;
-    private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
+
+    @Autowired
+    private final ProductRepository productRepository;
 
     public PromocodeService(PromocodeValidatorService validatorService,
                             PromocodeUsageLogRepository logRepository,
                             OrderService orderService,
                             PromocodeRepository promocodeRepository,
                             ProductRepository productRepository,
-                            CategoryRepository categoryRepository) {
+                            CategoryRepository categoryRepository,
+                            UserRepository userRepository) {
         this.validatorService = validatorService;
         this.logRepository = logRepository;
         this.orderService = orderService;
         this.promocodeRepository = promocodeRepository;
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
+        this.userRepository = userRepository;
     }
 
     public void createPromocodeAfterValidation(PromocodeRequest dto) {
@@ -67,6 +75,33 @@ public class PromocodeService {
         newPromocode.setUsedCount(dto.getUsedCount());
 
         promocodeRepository.save(newPromocode);
+    }
+
+    public PromocodeResponse validatePromocode(PromocodeIntermediaryRequest dto) {
+        Promocode promocode = promocodeRepository.findByCode(dto.getCode())
+                .orElseThrow(() -> new IllegalArgumentException("Promocode bestaat niet"));
+
+        // Map cart items naar dummy Order
+        List<OrderItem> orderItems = dto.getCartItems().stream().map(item -> {
+            Product product = productRepository.findById(item.getProductId())
+                    .orElseThrow(() -> new IllegalArgumentException("Product ID " + item.getProductId() + " niet gevonden"));
+            return new OrderItem(product, item.getProductName(), item.getQuantity(), BigDecimal.valueOf(item.getPrice()));
+        }).toList();
+
+
+        Order dummyOrder = new Order();
+        dummyOrder.setEmail(dto.getEmail());
+        dummyOrder.setOrderItems(orderItems);
+        dummyOrder.setTotalPrice(dto.getTotalPrice());
+
+
+        if (!validatorService.validate(promocode, dummyOrder, dto.getEmail())) {
+            throw new IllegalArgumentException("Promocode is niet geldig voor deze bestelling");
+        }
+
+        BigDecimal korting = validatorService.applyDiscount(promocode, dummyOrder, dto.getEmail());
+
+        return new PromocodeResponse(korting, true, "Promocode toegepast");
     }
 
 //    public Order validateAndApplyPromocode(OrderRequest dto) {

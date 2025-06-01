@@ -4,30 +4,45 @@ import { NgIf, NgFor } from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateModule} from '@ngx-translate/core';
+import {FormsModule} from "@angular/forms";
+import {PromocodeService} from "../services/promocode.service";
 
 @Component({
   selector: 'app-shopping-cart',
-  imports: [NgIf, NgFor, RouterModule, TranslateModule],
+    imports: [NgIf, NgFor, RouterModule, TranslateModule, FormsModule],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.scss'
 })
 export class ShoppingCartComponent {
   private cartService = inject(ShoppingCartService);
   private toastrService = inject(ToastrService);
+  private promocodeService = inject(PromocodeService);
+  private discount: number = 0;
+  protected promocodeApplied: boolean = false;
+  appliedDiscountValue: number = 0;
 
   cart = this.cartService.getCart();
+  totalPrice: number = 0;
+  promoCode: any;
+
+  constructor() {
+    this.updateTotalPrice();
+  }
 
   protected removeProduct(productId: number): void{
     this.cartService.removeFromCart(productId);
+    this.updateTotalPrice();
     this.showSuccess("Product removed");
   }
 
   protected increaseQuantity(productId: number): void {
     this.cartService.increaseQuantity(productId);
+    this.updateTotalPrice();
   }
 
   protected decreaseQuantity(productId: number): void {
     this.cartService.decreaseQuantity(productId);
+    this.updateTotalPrice();
   }
 
   protected clearCart(): void {
@@ -35,14 +50,47 @@ export class ShoppingCartComponent {
     this.showSuccess("Cart cleared");
   }
 
-  protected getTotalPrice(): number {
-    return this.cart().reduce((total, item) => total + item.product.price * item.quantity, 0);
+  // protected getTotalPrice(): number {
+  //   return this.cart().reduce((total, item) => total + item.product.price * item.quantity, 0);
+  // }
+
+  private updateTotalPrice(): void {
+    const baseTotal = this.cart().reduce((total, item) => total + item.product.price * item.quantity, 0);
+    this.totalPrice = baseTotal - this.discount;
+  }
+
+
+
+  protected applyPromocode(): void {
+    this.promocodeService.sendCodeToAPI(this.promoCode).subscribe({
+        next: (response) => {
+            if (response.valid) {
+            this.discount = response.discountValue;
+            this.appliedDiscountValue = response.discountValue;
+            this.showSuccess('Promo code applied!');
+            this.cartService.setDiscountValue(this.appliedDiscountValue);
+            this.promocodeApplied = true;
+            } else {
+            this.discount = 0;
+            this.appliedDiscountValue = 0;
+            this.showSuccess('Invalid promo code');
+            }
+            this.updateTotalPrice();
+        },
+        error: (error) => {
+            console.error('Error applying promo code:', error);
+            this.showSuccess('Error applying promo code');
+        }
+    })
   }
 
   public showSuccess(message: string): void {
     this.toastrService.success(`<b>${message}</b>`, 'Success!', {
       toastClass: 'custom-toast-class',
       enableHtml: true,
+      timeOut: 5000,
     });
   }
+
+
 }

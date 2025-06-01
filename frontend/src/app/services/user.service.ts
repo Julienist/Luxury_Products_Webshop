@@ -41,6 +41,10 @@ export class UserService {
     return localStorage.getItem(this.authTokenKey);
   }
 
+  public getEmailFromLocalStorage(): string | null {
+    return localStorage.getItem('userEmail');
+  }
+
   public getUserRoles(): string[] {
     const roles = localStorage.getItem('userRoles');
     return roles ? JSON.parse(roles) : [];

@@ -10,6 +10,10 @@ export class ShoppingCartService {
 
   private cart = signal<CartItem[]>([]);
 
+  private discountValue = 0;
+  setDiscountValue(value: number): void { this.discountValue = value; }
+  getDiscountValue(): number { return this.discountValue; }
+
   constructor() {
     const savedUserId = localStorage.getItem('loggedInUserId');
     if (savedUserId) {

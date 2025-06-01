@@ -23,6 +23,8 @@ public class Order {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private CustomUser user;
 
+    private String email;
+
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<OrderItem> orderItems;

@@ -10,7 +10,10 @@
     "empty": "Winkelwagen legen",
     "checkout": "afrekenen",
     "noCart": "Je winkelwagen is leeg.",
-    "warning": "Zorg ervoor dat je een account aanmaakt om je winkelwagen op te slaan."
+    "warning": "Zorg ervoor dat je een account aanmaakt om je winkelwagen op te slaan.",
+    "Total_price": "Totaal prijs: €",
+    "promocode": "Promocode",
+    "applying_promocode": "Promocode toepassen"
   },
   "product": {
     "buy": "kopen",

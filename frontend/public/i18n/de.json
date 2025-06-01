@@ -10,7 +10,10 @@
     "empty": "Warenkorb leeren",
     "checkout": "Zur Kasse",
     "noCart": "Ihr Warenkorb ist leer.",
-    "warning": "Stelle sicher, dass du ein Konto erstellst, um deinen Warenkorb zu speichern."
+    "warning": "Stelle sicher, dass du ein Konto erstellst, um deinen Warenkorb zu speichern.",
+    "Total_price": "Gesamtpreis: €",
+    "promocode": "Promo-Code",
+    "applying_promocode": "Promo-Code anwenden"
   },
   "product": {
     "buy": "Kaufen",

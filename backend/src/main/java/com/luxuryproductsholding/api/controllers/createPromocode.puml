@@ -1,0 +1,31 @@
+@startuml
+autonumber
+
+actor Client
+participant "PromocodeController" as Controller
+participant "PromocodeService" as Service
+participant "PromocodeValidatorService" as Validator
+participant "ProductRepository" as ProductRepo
+participant "CategoryRepository" as CategoryRepo
+participant "PromocodeRepository" as PromoRepo
+
+Client -> Controller: POST /promocodes\n(RequestBody: PromocodeRequest)
+Controller -> Service: createPromocodeAfterValidation(promocodeRequest)
+Service -> Validator: validatePromocodeOnCreation(dto)
+Validator -> PromoRepo: existsByCode(code)
+Validator --> PromoRepo: (returns boolean)
+Validator -> ProductRepo: existsByName(scopeValue) [if PRODUCT]
+Validator --> ProductRepo: (returns boolean)
+Validator -> CategoryRepo: existsByName(scopeValue) [if CATEGORY]
+Validator --> CategoryRepo: (returns boolean)
+Validator --> Service: (validation done)
+Service -> ProductRepo: findByName(scopeValue) [if PRODUCT]
+Service <-- ProductRepo: Product
+Service -> CategoryRepo: findByName(scopeValue) [if CATEGORY]
+Service <-- CategoryRepo: Category
+note right: Service creates new Promocode\nand fills all fields
+Service -> PromoRepo: save(newPromocode)
+PromoRepo --> Service: (saved Promocode)
+Service --> Controller: (void)
+Controller --> Client: 200 OK\n"Promocode is valid and created."
+@enduml

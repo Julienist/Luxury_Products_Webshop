@@ -74,6 +74,13 @@ public class OrderService {
                     .multiply(BigDecimal.valueOf(itemDTO.getQuantity())));
         }
 
+        if (orderRequest.getDiscountValue() != null) {
+            totalPrice = totalPrice.subtract(orderRequest.getDiscountValue());
+            if (totalPrice.compareTo(BigDecimal.ZERO) < 0) {
+                totalPrice = BigDecimal.ZERO;
+            }
+        }
+
         order.setOrderItems(orderItems);
         order.setTotalPrice(totalPrice);
 

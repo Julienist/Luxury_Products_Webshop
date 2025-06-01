@@ -15,12 +15,13 @@ export class OrderService {
   private httpClient = inject(HttpClient);
   private cartService = inject(ShoppingCartService);
 
-  public createOrder(userId: number, shippingAddress: string): Observable<ResponseOrderData> {
+  public createOrder(userId: number, shippingAddress: string, discountValue?: number): Observable<ResponseOrderData> {
     const cartItems = this.cartService.getCart()();
 
     const orderData: OrderRequest = {
       userId: userId,
       shippingAddress: shippingAddress,
+      discountValue: discountValue,
       orderItems: cartItems.map(item => ({
         productId: item.product.id,
         productName: item.product.name,

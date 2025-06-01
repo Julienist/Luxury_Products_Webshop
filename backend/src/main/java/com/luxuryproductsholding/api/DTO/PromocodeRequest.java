@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 public class PromocodeRequest {
 
     private String code;
-//    private boolean active; // Indicates if the promocode is currently active
     private String scopeType; // 'CATEGORY' or 'PRODUCT'
     private String scopeValue; // The scope type is a category String or a Product String
     private String discountType; // 'PERCENTAGE' or 'FIXED'

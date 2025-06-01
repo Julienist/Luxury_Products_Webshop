@@ -17,8 +17,8 @@ public class PromocodeUsageLog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private CustomUser user;
+//    @ManyToOne
+    private String email;
 
     private LocalDateTime usedAt;
 

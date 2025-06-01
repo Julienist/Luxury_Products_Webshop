@@ -9,6 +9,7 @@ import com.luxuryproductsholding.api.models.Promocode;
 import com.luxuryproductsholding.api.strategy.DiscountStrategy;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -17,22 +18,79 @@ import java.util.List;
 @Service
 public class PromocodeValidatorService {
 
-    private final List<DiscountStrategy> discountStrategies;
+//    private final List<DiscountStrategy> strategies;
+    private final List<DiscountStrategy> validationStrategies;
+    private final List<DiscountCalculator> discountCalculators;
     private final PromocodeRepository promocodeRepository;
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
+//    @Autowired
+//    public PromocodeValidatorService(List<DiscountStrategy> strategies,
+//                                     PromocodeRepository promocodeRepository,
+//                                     ProductRepository productRepository,
+//                                     CategoryRepository categoryRepository) {
+//        this.strategies = strategies;
+//        this.promocodeRepository = promocodeRepository;
+//        this.productRepository = productRepository;
+//        this.categoryRepository = categoryRepository;
+//    }
+
     @Autowired
-    public PromocodeValidatorService(List<DiscountStrategy> discountStrategies, PromocodeRepository promocodeRepository, ProductRepository productRepository, CategoryRepository categoryRepository) {
-        this.discountStrategies = discountStrategies;
+    public PromocodeValidatorService(
+            PromocodeRepository promocodeRepository,
+            ProductRepository productRepository,
+            CategoryRepository categoryRepository,
+            @Qualifier("validationStrategies") List<DiscountStrategy> validationStrategies,
+            @Qualifier("discountCalculators") List<DiscountCalculator> discountCalculators
+    ) {
+        this.validationStrategies = validationStrategies;
+        this.discountCalculators = discountCalculators;
         this.promocodeRepository = promocodeRepository;
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
     }
 
+//    public boolean validate(Promocode promocode, Order order, String email) {
+//        for (DiscountStrategy strategy : strategies) {
+//            if (!strategy.isApplicable(promocode, order, email)) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
+
     public boolean validate(Promocode promocode, Order order, String email) {
-        return discountStrategies.stream()
-                .allMatch(strategy -> strategy.isApplicable(promocode, order, email));
+        for (DiscountStrategy strategy : validationStrategies) {
+            if (!strategy.isApplicable(promocode, order, email)) {
+                return false;
+            }
+            boolean result = strategy.isApplicable(promocode, order, email);
+            System.out.println("Strategy: " + strategy.getClass().getSimpleName() + " → " + result);
+            if (!result) return false;
+
+        }
+        return true;
+    }
+
+
+//    public BigDecimal applyDiscount(Promocode promocode, Order order, String email) {
+//        for (DiscountStrategy strategy : strategies) {
+//            if (strategy instanceof DiscountCalculator calc
+//                    && strategy.isApplicable(promocode, order, email)) {
+//                return calc.calculateDiscount(promocode, order);
+//            }
+//        }
+//        return BigDecimal.ZERO;
+//    }
+
+    public BigDecimal applyDiscount(Promocode promocode, Order order, String email) {
+        for (DiscountCalculator calculator : discountCalculators) {
+            if (calculator.isApplicable(promocode, order, email)) {
+                return calculator.calculateDiscount(promocode, order);
+            }
+        }
+        return BigDecimal.ZERO;
     }
 
     public void validatePromocodeOnCreation(@NotNull PromocodeRequest promocode) {
@@ -53,11 +111,12 @@ public class PromocodeValidatorService {
     public void validatePromocodeCode(@NotNull String code) {
         if (code.isEmpty()) {
             throw new IllegalArgumentException("Promocode mag niet leeg zijn.");
-        }
-        if (promocodeRepository.existsByCode(code)) {
+        } if (promocodeRepository.existsByCode(code)) {
             throw new IllegalArgumentException("Promocode bestaat al.");
         } else if (code.length() < 3) {
             throw new IllegalArgumentException("Promocode moet tenminste 3 tekens lang zijn.");
+        } else if (!code.matches("^[a-zA-Z0-9]+$")) {
+            throw new IllegalArgumentException("Promocode mag alleen alfanumerieke tekens bevatten.");
         }
     }
 
@@ -135,17 +194,5 @@ public class PromocodeValidatorService {
         }
     }
 
-    public BigDecimal applyDiscount(Promocode promocode, Order order, String email) {
-        if (!validate(promocode, order, email)) {
-            throw new IllegalArgumentException("Promocode is niet geldig voor deze bestelling.");
-        }
-
-        // Eén strategie is verantwoordelijk voor de korting zelf
-        return discountStrategies.stream()
-                .filter(strategy -> strategy instanceof DiscountCalculator)
-                .map(strategy -> ((DiscountCalculator) strategy).calculateDiscount(promocode, order))
-                .findFirst()
-                .orElse(BigDecimal.ZERO);
-    }
 }
 
