@@ -1,6 +1,5 @@
 package com.luxuryproductsholding.api.DTO;
 
-import com.luxuryproductsholding.api.models.Product;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
