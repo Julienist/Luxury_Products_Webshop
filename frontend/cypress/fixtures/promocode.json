@@ -1,0 +1,10 @@
+{
+  "code": "TEST123",
+  "scopeType": "CATEGORY",
+  "scopeValue": "Horloges",
+  "discountType": "PERCENTAGE",
+  "discountValue": 50,
+  "minOrderAmount": 1000,
+  "maxUsesPerEmail": 3,
+  "expiryDate": "2025-06-19T22:00:00.000Z"
+}

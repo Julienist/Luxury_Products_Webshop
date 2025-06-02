@@ -27,13 +27,13 @@ public class Promocode {
     private LocalDateTime expiryDate;
 
     @Enumerated(EnumType.STRING)
-    private DiscountType discountType; // PERCENTAGE, FIXED_AMOUNT
+    private DiscountType discountType;
 
     private BigDecimal discountValue;
 
     private BigDecimal minimumOrderAmount;
 
-    private Integer usedCount; // Tracks how many times the promocode has been used
+    private Integer usedCount;
     private Integer maxUsesPerEmail;
 
     @ManyToMany
@@ -55,7 +55,5 @@ public class Promocode {
         this.applicableProducts = applicableProducts;
         this.applicableCategories = applicableCategories;
     }
-
-    // Logging komt in een aparte table
 }
 
