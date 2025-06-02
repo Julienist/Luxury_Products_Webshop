@@ -27,6 +27,16 @@ export class ShoppingCartComponent {
 
   constructor() {
     this.updateTotalPrice();
+    const applied = localStorage.getItem('promocodeApplied');
+      if (applied === 'true') {
+          this.promocodeApplied = true;
+          this.appliedDiscountValue = Number(localStorage.getItem('appliedDiscountValue')) || 0;
+          this.discount = this.appliedDiscountValue;
+      } else {
+            this.promocodeApplied = false;
+            this.appliedDiscountValue = 0;
+            this.discount = 0;
+      }
   }
 
   protected removeProduct(productId: number): void{
@@ -70,10 +80,14 @@ export class ShoppingCartComponent {
             this.showSuccess('Promo code applied!');
             this.cartService.setDiscountValue(this.appliedDiscountValue);
             this.promocodeApplied = true;
+            localStorage.setItem('promocodeApplied', 'true');
+            localStorage.setItem('appliedDiscountValue', String(this.appliedDiscountValue));
             } else {
             this.discount = 0;
             this.appliedDiscountValue = 0;
             this.showSuccess('Invalid promo code');
+            localStorage.removeItem('promocodeApplied');
+            localStorage.removeItem('appliedDiscountValue');
             }
             this.updateTotalPrice();
         },

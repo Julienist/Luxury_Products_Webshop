@@ -89,6 +89,11 @@ public class PromocodeValidatorService {
             if (calculator.isApplicable(promocode, order, email)) {
                 return calculator.calculateDiscount(promocode, order);
             }
+            boolean calcResult = calculator.isApplicable(promocode, order, email);
+            System.out.println(STR."Calculator: \{calculator.getClass().getSimpleName()} → \{calcResult}");
+            if (!calcResult) {
+                continue;
+            }
         }
         return BigDecimal.ZERO;
     }

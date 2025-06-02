@@ -58,6 +58,8 @@ export class UserService {
     localStorage.removeItem(this.authTokenKey);
     localStorage.removeItem('userEmail');
     localStorage.removeItem('userRoles');
+    localStorage.removeItem('promocodeApplied');
+    localStorage.removeItem('appliedDiscountValue');
     this.loggedInSubject.next(false);
   }
 

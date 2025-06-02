@@ -35,6 +35,8 @@ export class OrderComponent {
   });
 
   protected submitOrder(): void {
+    localStorage.removeItem('promocodeApplied');
+    localStorage.removeItem('appliedDiscountValue');
     const userId = this.userService.getUserId();
     const userIdAsNumber = Number(userId);
     if (isNaN(userIdAsNumber)) {

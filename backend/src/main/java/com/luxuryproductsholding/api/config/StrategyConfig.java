@@ -1,10 +1,7 @@
 package com.luxuryproductsholding.api.config;
 
 import com.luxuryproductsholding.api.services.DiscountCalculator;
-import com.luxuryproductsholding.api.strategy.DiscountStrategy;
-import com.luxuryproductsholding.api.strategy.FixedDiscountStrategy;
-import com.luxuryproductsholding.api.strategy.OrderMinimumStrategy;
-import com.luxuryproductsholding.api.strategy.PercentageDiscountStrategy;
+import com.luxuryproductsholding.api.strategy.*;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +14,12 @@ public class StrategyConfig {
 
     @Bean
     @Qualifier("validationStrategies")
-    public List<DiscountStrategy> validationStrategies(OrderMinimumStrategy orderMinimumStrategy) {
-        return List.of(orderMinimumStrategy);
+    public List<DiscountStrategy> validationStrategies(
+            OrderMinimumStrategy orderMinimumStrategy,
+            MaxUsesPerEmailStrategy maxPerEmail,
+            ProductScopeStrategy productScope
+    ) {
+        return List.of(orderMinimumStrategy, maxPerEmail, productScope);
     }
 
     @Bean
