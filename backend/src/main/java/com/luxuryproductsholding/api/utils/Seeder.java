@@ -13,10 +13,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class Seeder {
 
-    private ProductRepository productRepository;
-    private CategoryRepository categoryRepository;
-    private UserRepository userRepository;
-    private RoleRepository roleRepository;
+    private final ProductRepository productRepository;
+    private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     public Seeder(ProductRepository productRepository, CategoryRepository categoryRepository,
                   UserRepository userRepository, RoleRepository roleRepository) {
