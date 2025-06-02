@@ -6,6 +6,7 @@ import com.luxuryproductsholding.api.DTO.PromocodeResponse;
 import com.luxuryproductsholding.api.services.PromocodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +26,7 @@ public class PromocodeController {
     }
 
     @PostMapping
+    @PreAuthorize("hasRole('Make_and_deactivate_promocodes') or hasRole('SuperAdmin')")
     public ResponseEntity<String> createPromocode(@RequestBody PromocodeRequest promocodeRequest) {
         try {
             promocodeService.createPromocodeAfterValidation(promocodeRequest);

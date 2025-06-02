@@ -37,3 +37,4 @@ build/
 /mvnw.cmd
 /.mvn/
 /src/main/resources/application.properties
+/UML/
