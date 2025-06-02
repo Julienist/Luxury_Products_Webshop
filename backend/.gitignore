@@ -38,3 +38,10 @@ build/
 /.mvn/
 /src/main/resources/application.properties
 /UML/
+/UML/
+/UML/ClassDiagramPromocodes.puml
+/UML/createPromocode.puml
+/UML/createPromocode_2.puml
+/UML/StrategyArchitechtureUML.puml
+/UML/StrategyArchitechtureUML2.puml
+/UML/validatePromocode.puml
