@@ -1,5 +1,6 @@
 package com.luxuryproductsholding.api.DAO;
 
+import com.luxuryproductsholding.api.models.Promocode;
 import com.luxuryproductsholding.api.models.PromocodeUsageLog;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -12,4 +13,6 @@ public interface PromocodeUsageLogRepository extends JpaRepository<PromocodeUsag
     Optional<PromocodeUsageLog> findByEmailAndPromocode_Code(String email, String promocodeCode);
 
     List<PromocodeUsageLog> findAllByEmailAndPromocode_Code(String email, String promocodeCode);
+
+    int countByEmailAndPromocode(String email, Promocode promocode);
 }

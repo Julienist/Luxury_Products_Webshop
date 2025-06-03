@@ -136,7 +136,7 @@ public class PromocodeValidatorService {
         if (promocode.getScopeValue() == null || promocode.getScopeValue().isEmpty()) {
             throw new IllegalArgumentException("Scope waarde mag niet leeg zijn.");
         }
-        // Controleer of de scope waarde overeenkomt met het scope type.
+        // Controleer of de scope waarde overeenkomt met het scopetype.
         // en of het een geldige entiteit is, zoals een Product of Category.
         // Ervanuitgaande dat juiste product/categorie data altijd naar frontend wordt gestuurd.
         // is onderstaande check niet nodig, maar voor de zekerheid:

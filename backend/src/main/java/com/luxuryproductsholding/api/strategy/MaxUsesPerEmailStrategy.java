@@ -25,8 +25,12 @@ public class MaxUsesPerEmailStrategy implements DiscountStrategy {
         if (maxPerEmail == null || maxPerEmail <= 0) {
             return true;
         }
+        if (maxPerEmail == 1) {
+            return logRepository.findByEmailAndPromocode_Code(email, promocode.getCode()).isEmpty();
+        }
 
         List<PromocodeUsageLog> usedLogs = logRepository.findAllByEmailAndPromocode_Code(email, promocode.getCode());
+
         return usedLogs.size() < maxPerEmail;
     }
 }

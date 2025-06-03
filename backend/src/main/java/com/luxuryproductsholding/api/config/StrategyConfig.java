@@ -17,9 +17,10 @@ public class StrategyConfig {
     public List<DiscountStrategy> validationStrategies(
             OrderMinimumStrategy orderMinimumStrategy,
             MaxUsesPerEmailStrategy maxPerEmail,
-            ProductScopeStrategy productScope
+            ProductScopeStrategy productScope,
+            ActiveStatePromocodeStrategy activeState
     ) {
-        return List.of(orderMinimumStrategy, maxPerEmail, productScope);
+        return List.of(orderMinimumStrategy, maxPerEmail, productScope, activeState);
     }
 
     @Bean
