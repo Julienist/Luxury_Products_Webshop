@@ -1,14 +1,18 @@
 package com.luxuryproductsholding.api.utils;
 
-import com.luxuryproductsholding.api.DAO.CategoryRepository;
-import com.luxuryproductsholding.api.DAO.ProductRepository;
-import com.luxuryproductsholding.api.DAO.RoleRepository;
-import com.luxuryproductsholding.api.DAO.UserRepository;
+import com.luxuryproductsholding.api.DAO.*;
 import com.luxuryproductsholding.api.models.*;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
 
 @Component
 public class Seeder {
@@ -17,13 +21,16 @@ public class Seeder {
     private final CategoryRepository categoryRepository;
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final PromocodeRepository promocodeRepository;
 
     public Seeder(ProductRepository productRepository, CategoryRepository categoryRepository,
-                  UserRepository userRepository, RoleRepository roleRepository) {
+                  UserRepository userRepository, RoleRepository roleRepository,
+                  PromocodeRepository promocodeRepository) {
         this.productRepository = productRepository;
         this.categoryRepository = categoryRepository;
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.promocodeRepository = promocodeRepository;
     }
 
     @EventListener
@@ -31,6 +38,7 @@ public class Seeder {
         seedCategoriesAndProducts();
         seedRoles();
         seedAdminUser();
+        seedPromocodes();
     }
 
     private void seedCategoriesAndProducts() {
@@ -136,5 +144,74 @@ public class Seeder {
         juridisch.getRoles().add(roleRepository.findByName("Insight_promocode_usage"));
         juridisch.getRoles().add(roleRepository.findByName("ROLE_JURIDISCH"));
         userRepository.save(juridisch);
+    }
+
+    public void seedPromocodes() {
+        // Fetch products and categories as needed
+        Optional<Category> horloges = categoryRepository.findByName("Horloges");
+        Optional<Category> armbanden = categoryRepository.findByName("Armbanden");
+        Optional<Product> rolex = productRepository.findByName("Rolex Submariner");
+        Optional<Product> cartier = productRepository.findByName("Cartier Love Bracelet");
+
+        // Unwrap Optionals and add to sets if present
+        Set<Product> rolexSet = new HashSet<>();
+        rolex.ifPresent(rolexSet::add);
+
+        Set<Category> horlogesSet = new HashSet<>();
+        horloges.ifPresent(horlogesSet::add);
+
+        Set<Product> cartierSet = new HashSet<>();
+        cartier.ifPresent(cartierSet::add);
+
+        Set<Category> armbandenSet = new HashSet<>();
+        armbanden.ifPresent(armbandenSet::add);
+
+        // paar promocodes voor test purposes.
+        Promocode p1 = new Promocode(
+                "LUXURY10", true,
+                LocalDate.now().minusDays(10), LocalDate.now().plusMonths(1),
+                DiscountType.PERCENTAGE, new BigDecimal("10"),
+                new BigDecimal("500"), 0, 2,
+                Collections.emptySet(), horlogesSet
+        );
+
+        Promocode p2 = new Promocode(
+                "BRACELET20", true,
+                LocalDate.now().minusDays(5), LocalDate.now().plusMonths(2),
+                DiscountType.PERCENTAGE, new BigDecimal("20"),
+                new BigDecimal("1000"), 0, 1,
+                Collections.emptySet(), armbandenSet
+        );
+
+        Promocode p3 = new Promocode(
+                "ROLEX100", true,
+                LocalDate.now(), LocalDate.now().plusWeeks(2),
+                DiscountType.FIXED, new BigDecimal("100"),
+                new BigDecimal("2000"), 0, 1,
+                rolexSet, Collections.emptySet()
+        );
+
+        Promocode p4 = new Promocode(
+                "CARTIER50", true,
+                LocalDate.now().minusDays(2), LocalDate.now().plusMonths(3),
+                DiscountType.FIXED, new BigDecimal("50"),
+                new BigDecimal("500"), 0, 3,
+                cartierSet, Collections.emptySet()
+        );
+
+        Promocode p5 = new Promocode(
+                "WELCOME5", true,
+                LocalDate.now(), LocalDate.now().plusMonths(6),
+                DiscountType.PERCENTAGE, new BigDecimal("5"),
+                new BigDecimal("0"), 0, 5,
+                Collections.emptySet(), Collections.emptySet()
+        );
+
+        // Save promocodes
+        promocodeRepository.save(p1);
+        promocodeRepository.save(p2);
+        promocodeRepository.save(p3);
+        promocodeRepository.save(p4);
+        promocodeRepository.save(p5);
     }
 }

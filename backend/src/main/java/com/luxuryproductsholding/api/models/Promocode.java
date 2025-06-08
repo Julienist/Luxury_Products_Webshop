@@ -42,7 +42,12 @@ public class Promocode {
     @ManyToMany
     private Set<Category> applicableCategories;
 
-    public Promocode(String code, boolean active, LocalDate creationDate, LocalDate expiryDate, DiscountType discountType, BigDecimal discountValue, BigDecimal minimumOrderAmount, Integer usedCount, Integer maxUsesPerEmail, Set<Product> applicableProducts, Set<Category> applicableCategories) {
+    public Promocode(String code, boolean active,
+                     LocalDate creationDate, LocalDate expiryDate,
+                     DiscountType discountType, BigDecimal discountValue,
+                     BigDecimal minimumOrderAmount, Integer usedCount,
+                     Integer maxUsesPerEmail, Set<Product> applicableProducts,
+                     Set<Category> applicableCategories) {
         this.code = code;
         this.active = active;
         this.creationDate = creationDate.atStartOfDay();
