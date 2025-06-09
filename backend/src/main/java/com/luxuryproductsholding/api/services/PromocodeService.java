@@ -188,6 +188,72 @@ public class PromocodeService {
 //        }
 //    }
 
+    public void logPromocodeUsage(String email, Promocode promocode, BigDecimal korting) {
+        PromocodeUsageLog log = new PromocodeUsageLog();
+        log.setEmail(email);
+        log.setUsedAt(java.time.LocalDateTime.now());
+        log.setPromocode(promocode);
+        log.setDiscountApplied(korting);
+
+        logRepository.save(log);
+    }
+
+    public List<String> getAllPromocodeCodes() {
+        try {
+            List<Promocode> promocodes = promocodeRepository.findAll();
+            return promocodes.stream()
+                    .map(Promocode::getCode)
+                    .toList();
+        } catch (Exception e) {
+            throw new RuntimeException("Fout bij het ophalen van de promotiecodes: " + e.getMessage(), e);
+        }
+    }
+
+//    public void enablePromocode(PromocodeEnableDTO dto) {
+//        Promocode promocode = promocodeRepository.findByCode(dto.getCode())
+//                .orElseThrow(() -> new IllegalArgumentException("Promocode bestaat niet"));
+//
+//        if (dto.isActive()) {
+//            throw new IllegalArgumentException("Promocode is al actief");
+//        }
+//
+//        promocode.setActive(true);
+//        promocodeRepository.save(promocode);
+//    }
+
+    public void disablePromocode(String code) {
+        Promocode promocode = promocodeRepository.findByCode(code)
+                .orElseThrow(() -> new IllegalArgumentException("Promocode bestaat niet"));
+
+        // als code al inactief is, gooi een fout
+        if (!promocode.isActive()) {
+            throw new IllegalArgumentException("Promocode is al inactief");
+        }
+
+        promocode.setActive(false);
+        promocodeRepository.save(promocode);
+    }
+
+//    public String getAllPromocodes() {
+//        List<Promocode> promocodes = promocodeRepository.findAll();
+//        StringBuilder sb = new StringBuilder();
+//        for (Promocode promocode : promocodes) {
+//            sb.append(promocode.toString()).append("\n");
+//        }
+//        return sb.toString();
+//    }
+
+//    public List<PromocodesList> getAllPromocodes() {
+//        try {
+//        List<Promocode> promocodes = promocodeRepository.findAll();
+//        return promocodes.stream()
+//                .map(promocode -> new PromocodesList(List.of(promocode.getCode())))
+//                .toList();
+//        } catch (Exception e) {
+//            throw new RuntimeException("Fout bij het ophalen van de promotiecodes: " + e.getMessage(), e);
+//        }
+//    }
+
 //    public Order validateAndApplyPromocode(OrderRequest dto) {
 //        Promocode promocode = promocodeRepository.findByCode(dto.getPromocode())
 //                .orElseThrow(() -> new IllegalArgumentException("Promocode bestaat niet"));

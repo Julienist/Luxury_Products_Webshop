@@ -1,0 +1,21 @@
+
+<form [formGroup]="deactivatePromocodeForm" (ngSubmit)="submitDeactivatePromocode()" class="deactivate-promo-form">
+
+    <mat-form-field appearance="fill" class="full-width">
+        <mat-label>{{ 'deactivate_promoc_page.codequestion' | translate }}</mat-label>
+        <mat-select formControlName="promocode" name="codeValue">
+            <mat-option *ngFor="let code of promocodesList" [value]="code" name="promocodeCode">
+                {{ code }}
+            </mat-option>
+        </mat-select>
+<!--        <input matInput formControlName="code" placeholder="{{ 'deactivate_promoc_page.examplecode' | translate }}" name="promocodeInput" />-->
+        <mat-error *ngIf="deactivatePromocodeForm.get('code')?.hasError('required')" name="codeRequiredError">
+            {{ 'deactivate_promoc_page.coderequirederror' | translate }}
+        </mat-error>
+    </mat-form-field>
+
+    <div class="btn-group">
+        <button mat-raised-button color="primary" type="submit" [disabled]="deactivatePromocodeForm.invalid" name="submit" >{{ 'deactivate_promoc_page.deactivate_button' | translate }}</button>
+        <button mat-raised-button color="warn" type="button" (click)="cancel()">{{ 'deactivate_promoc_page.cancel_button' | translate }}</button>
+    </div>
+</form>

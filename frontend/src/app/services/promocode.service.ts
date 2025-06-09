@@ -1,6 +1,7 @@
 import { inject, Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
-import { Observable } from "rxjs";
+import { catchError, map, Observable, of } from "rxjs";
+import { PromoCodesListRequest } from "../models/promoCodesListRequest";
 import { ResponsePromocodeData } from "../models/ResponsePromocodeData";
 import { PromocodeRequest } from "../models/PromocodeRequest";
 import { environment } from "../../environments/environment";
@@ -41,6 +42,45 @@ export class PromocodeService {
         return this.httpClient.post<ResponsePromocodeData>(
             environment.baseApiUrl + '/promocodes/validateAndApply',
             code
+        );
+    }
+
+    public getPromocodes(): Observable<PromoCodesListRequest> {
+        return this.httpClient.get<string[]>(
+            environment.baseApiUrl + '/promocodes',
+            { responseType: 'json' as 'json' }
+        ).pipe(
+            map(codes => ({ promoCodes: codes })),
+            catchError(error => {
+                console.error('Error fetching promocodes:', error);
+                // Return an empty list as a fallback
+                return of({ promoCodes: [] });
+            })
+        );
+    }
+
+    // public deactivatePromocode(promocode: string): Observable<string> {
+    //     return this.httpClient.put<string>(
+    //         environment.baseApiUrl + '/promocodes/' + promocode,
+    //         { responseType: 'text' as 'json' }
+    //     ).pipe(
+    //         catchError(error => {
+    //             console.error('Error deactivating promocode:', error);
+    //             return of('Failed to deactivate promocode');
+    //         })
+    //     );
+    // }
+
+    public deactivatePromocode(promocode: string): Observable<string> {
+        return this.httpClient.put<string>(
+            environment.baseApiUrl + '/promocodes/disable_promocode_' + promocode,
+            {},
+            { responseType: 'text' as 'json' }
+        ).pipe(
+            catchError(error => {
+                console.error('Error deactivating promocode:', error);
+                return of('Failed to deactivate promocode');
+            })
         );
     }
 

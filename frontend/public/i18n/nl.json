@@ -83,6 +83,13 @@
     "make_promoc": "Maak promocode",
     "cancel": "Annuleer en ga terug"
   },
+  "deactivate_promoc_page": {
+    "codequestion": "Selecteer een promotiecode",
+    "examplecode": "example: LUXURY2025",
+    "coderequirederror": "Promotiecode is verplicht",
+    "deactivate_button": "Deactiveer promotiecode",
+    "cancel_button": "Annuleer en ga terug"
+  },
   "return": "Ga terug",
   "footer": {
     "copyright": "© 2025 Luxury Products"
