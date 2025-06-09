@@ -17,6 +17,7 @@ import {
   hasUsageInsightsRights,
   superAdminGuard
 } from "./services/admin.guard";
+import {DeactivatePromocodePageComponent} from "./deactivate-promocode-page/deactivate-promocode-page.component";
 
 export const routes: Routes = [
   {
@@ -74,11 +75,11 @@ export const routes: Routes = [
   //   canActivate: [superAdminGuard, hasInsightRights, hasUsageInsightsRights]
   //
   // },
-  // {
-  //   path: 'deactivate_promocodes',
-  //   redirectTo: 'deactivate_promocodes',
-  //   canActivate: [superAdminGuard, hasMakeDeactivateRights]
-  // }
+  {
+    path: 'deactivate_promocodes',
+    canActivate: [superAdminGuard, hasMakeDeactivateRights],
+    component: DeactivatePromocodePageComponent
+  }
 
 
 ];

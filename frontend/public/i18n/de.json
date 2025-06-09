@@ -83,6 +83,13 @@
     "make_promoc": "Promo-Code erstellen",
     "cancel": "Abbrechen und zurückgehen"
   },
+  "deactivate_promoc_page": {
+    "codequestion": "Wählen Sie einen Promo-Code",
+    "examplecode": "Beispiel: LUXURY2025",
+    "coderequirederror": "Promo-Code ist erforderlich",
+    "deactivate_button": "Promo-Code deaktivieren",
+    "cancel_button": "Abbrechen und zurückgehen"
+  },
   "return": "gehe zurück",
   "footer": {
     "copyright": "© 2025 Luxury Products"
