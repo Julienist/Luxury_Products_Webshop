@@ -144,50 +144,6 @@ public class PromocodeService {
         }
     }
 
-//    public void enablePromocode(PromocodeEnableDTO dto) {
-//        Promocode promocode = promocodeRepository.findByCode(dto.getCode())
-//                .orElseThrow(() -> new IllegalArgumentException("Promocode bestaat niet"));
-//
-//        if (dto.isActive()) {
-//            throw new IllegalArgumentException("Promocode is al actief");
-//        }
-//
-//        promocode.setActive(true);
-//        promocodeRepository.save(promocode);
-//    }
-
-//    public String getAllPromocodes() {
-//        List<Promocode> promocodes = promocodeRepository.findAll();
-//        StringBuilder sb = new StringBuilder();
-//        for (Promocode promocode : promocodes) {
-//            sb.append(promocode.toString()).append("\n");
-//        }
-//        return sb.toString();
-//    }
-
-//    public List<PromocodesList> getAllPromocodes() {
-//        try {
-//        List<Promocode> promocodes = promocodeRepository.findAll();
-//        return promocodes.stream()
-//                .map(promocode -> new PromocodesList(List.of(promocode.getCode())))
-//                .toList();
-//        } catch (Exception e) {
-//            throw new RuntimeException("Fout bij het ophalen van de promotiecodes: " + e.getMessage(), e);
-//        }
-//    }
-
-//    public void enablePromocode(PromocodeEnableDTO dto) {
-//        Promocode promocode = promocodeRepository.findByCode(dto.getCode())
-//                .orElseThrow(() -> new IllegalArgumentException("Promocode bestaat niet"));
-//
-//        if (dto.isActive()) {
-//            throw new IllegalArgumentException("Promocode is al actief");
-//        }
-//
-//        promocode.setActive(true);
-//        promocodeRepository.save(promocode);
-//    }
-
     public void disablePromocode(String code) {
         Promocode promocode = promocodeRepository.findByCode(code)
                 .orElseThrow(() -> new IllegalArgumentException("Promocode bestaat niet"));
@@ -200,61 +156,4 @@ public class PromocodeService {
         promocode.setActive(false);
         promocodeRepository.save(promocode);
     }
-
-//    public String getAllPromocodes() {
-//        List<Promocode> promocodes = promocodeRepository.findAll();
-//        StringBuilder sb = new StringBuilder();
-//        for (Promocode promocode : promocodes) {
-//            sb.append(promocode.toString()).append("\n");
-//        }
-//        return sb.toString();
-//    }
-
-//    public List<PromocodesList> getAllPromocodes() {
-//        try {
-//        List<Promocode> promocodes = promocodeRepository.findAll();
-//        return promocodes.stream()
-//                .map(promocode -> new PromocodesList(List.of(promocode.getCode())))
-//                .toList();
-//        } catch (Exception e) {
-//            throw new RuntimeException("Fout bij het ophalen van de promotiecodes: " + e.getMessage(), e);
-//        }
-//    }
-
-//    public Order validateAndApplyPromocode(OrderRequest dto) {
-//        Promocode promocode = promocodeRepository.findByCode(dto.getPromocode())
-//                .orElseThrow(() -> new IllegalArgumentException("Promocode bestaat niet"));
-//
-//        if (!validatorService.validate(promocode, dto.toOrder(), dto.getEmail())) {
-//            throw new IllegalArgumentException("Promocode niet geldig voor deze bestelling");
-//        }
-//
-//        BigDecimal korting = validatorService.applyDiscount(promocode, dto.toOrder(), dto.getEmail());
-//        Order order = orderService.createOrderWithDiscount(dto.toOrder(), korting);
-//
-//        logRepository.save(new PromocodeUsageLog(dto.getEmail(), promocode, korting, LocalDateTime.now()));
-//
-//        return order;
-//    }
-
-//    public Promocode getPromocodeByCode(String code) {
-//        if (code == null || code.isEmpty()) {
-//            throw new IllegalArgumentException("Promocode mag niet leeg zijn.");
-//        }
-//        return promocodeRepository.findByCode(code)
-//                .orElseThrow(() -> new IllegalArgumentException("Promocode bestaat niet."));
-//        // eigen exception maken..
-//    }
-
-//    public void validatePromocode(String code, Order order, String email) {
-//        Promocode promocode = getPromocodeByCode(code);
-//        if (!validatorService.validate(promocode, order, email)) {
-//            throw new IllegalArgumentException("Promocode is niet geldig voor deze bestelling.");
-//        }
-//    }
-
-//    public BigDecimal applyPromocode(String code, Order order, String email) {
-//        Promocode promocode = getPromocodeByCode(code);
-//        return validatorService.applyDiscount(promocode, order, email);
-//    }
 }
