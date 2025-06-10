@@ -14,23 +14,42 @@ export const superAdminGuard: CanActivateFn = () => {
 
 export const hasInsightRights = (): boolean => {
     const userService = inject(UserService);
-    return userService.getUserRoles().includes('All_insights') || userService.getUserRoles().includes('SuperAdmin');
+    return userService.getUserRoles().includes("All_insights") || userService.getUserRoles().includes("SuperAdmin");
 }
 
 export const hasUsageInsightsRights = (): boolean => {
     const userService = inject(UserService);
-    return userService.getUserRoles().includes('Insight_promocode_usage') || userService.getUserRoles().includes('SuperAdmin');
+    return userService.getUserRoles().includes("Insight_promocode_usage") || userService.getUserRoles().includes("SuperAdmin");
 }
 
 export const hasMakeDeactivateRights = (): boolean => {
     const userService = inject(UserService);
-    return userService.getUserRoles().includes('Make_and_deactivate_promocodes') || userService.getUserRoles().includes('SuperAdmin');
+    return userService.getUserRoles().includes("Make_and_deactivate_promocodes") || userService.getUserRoles().includes("SuperAdmin");
 }
 
 export const hasPromocodeManagementRights = (): boolean => {
     const userService = inject(UserService);
-    return userService.getUserRoles().includes('All_insights') ||
-           userService.getUserRoles().includes('Make_and_deactivate_promocodes') ||
-           userService.getUserRoles().includes('Insight_promocode_usage') ||
-           userService.getUserRoles().includes('SuperAdmin');
+    return userService.getUserRoles().includes("All_insights") ||
+           userService.getUserRoles().includes("Make_and_deactivate_promocodes") ||
+           userService.getUserRoles().includes("Insight_promocode_usage") ||
+           userService.getUserRoles().includes("SuperAdmin");
+}
+
+export const superAdminOrMakeDeactivateGuard: CanActivateFn = () => {
+    const userService = inject(UserService);
+    return userService.getUserRoles().includes('SuperAdmin') ||
+        userService.getUserRoles().includes('Make_and_deactivate_promocodes');
+};
+
+export const superAdminOrHasInsightRightsGuard: CanActivateFn = () => {
+    const userService = inject(UserService);
+    return userService.getUserRoles().includes('SuperAdmin') ||
+        userService.getUserRoles().includes('All_insights');
+}
+
+export const superAdminOrHasInsightOrUsageRightsGuard: CanActivateFn = () => {
+    const userService = inject(UserService);
+    return userService.getUserRoles().includes('SuperAdmin') ||
+        userService.getUserRoles().includes('All_insights') ||
+        userService.getUserRoles().includes('Insight_promocode_usage');
 }

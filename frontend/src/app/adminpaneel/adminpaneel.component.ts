@@ -20,21 +20,21 @@ export class AdminpaneelComponent {
 
   protected hasInsightRights(): boolean {
     const roles = this.userService.getUserRoles();
-    return roles.includes('All_insights') || roles.includes('SuperAdmin');
+    return roles.includes("All_insights") || roles.includes("SuperAdmin");
   }
 
   protected hasMakeDeactivateRights(): boolean {
     const roles = this.userService.getUserRoles();
-    return roles.includes('Make_and_deactivate_promocodes') || roles.includes('SuperAdmin');
+    return roles.includes("Make_and_deactivate_promocodes") || roles.includes("SuperAdmin");
   }
 
   protected hasUsageInsightsRights(): boolean {
     const roles = this.userService.getUserRoles();
-    return roles.includes('Insight_promocode_usage') || roles.includes('SuperAdmin');
+    return roles.includes("Insight_promocode_usage") || roles.includes("SuperAdmin");
   }
 
   protected hasPromocodeManagementRights(): boolean {
     const roles = this.userService.getUserRoles();
-    return roles.includes('All_insights') || roles.includes('Make_and_deactivate_promocodes') || roles.includes('Insight_promocode_usage') || roles.includes('SuperAdmin');
+    return roles.includes("All_insights") || roles.includes("Make_and_deactivate_promocodes") || roles.includes("Insight_promocode_usage") || roles.includes("SuperAdmin");
   }
 }
