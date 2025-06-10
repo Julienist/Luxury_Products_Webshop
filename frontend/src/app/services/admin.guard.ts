@@ -26,3 +26,11 @@ export const hasMakeDeactivateRights = (): boolean => {
     const userService = inject(UserService);
     return userService.getUserRoles().includes('Make_and_deactivate_promocodes') || userService.getUserRoles().includes('SuperAdmin');
 }
+
+export const hasPromocodeManagementRights = (): boolean => {
+    const userService = inject(UserService);
+    return userService.getUserRoles().includes('All_insights') ||
+           userService.getUserRoles().includes('Make_and_deactivate_promocodes') ||
+           userService.getUserRoles().includes('Insight_promocode_usage') ||
+           userService.getUserRoles().includes('SuperAdmin');
+}

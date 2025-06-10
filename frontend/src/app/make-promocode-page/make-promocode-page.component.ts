@@ -138,6 +138,6 @@ export class MakePromocodePageComponent implements OnInit {
     }
 
     onReturn() {
-        this.router.navigate(['/adminpanel']);
+        this.router.navigate(['adminpanel/promocode_beheer']);
     }
 }

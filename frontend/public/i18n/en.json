@@ -56,10 +56,14 @@
     "user": "My account"
   },
   "adminpan": {
+    "promocode_management": "promocode management"
+  },
+  "promoc_manage": {
     "make_promoc": "Make a promo code",
     "see_all_promoc": "See all promo codes",
     "see_all_act_promoc": "See all active promo codes",
-    "deact_promoc": "Deactivate promo code"
+    "deact_promoc": "Deactivate promo code",
+    "go_back": "Go back to the admin panel"
   },
   "make_promoc_page": {
     "codequestion": "What is the promo code?",

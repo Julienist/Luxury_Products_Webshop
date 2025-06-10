@@ -82,7 +82,7 @@ export class DeactivatePromocodePageComponent implements OnInit {
   public cancel(): void {
     this.deactivatePromocodeForm.reset();
     this.toastrService.info('Deactivation cancelled');
-    this.router.navigate(['/adminpanel']);
+    this.router.navigate(['adminpanel/promocode_beheer']);
   }
 
 

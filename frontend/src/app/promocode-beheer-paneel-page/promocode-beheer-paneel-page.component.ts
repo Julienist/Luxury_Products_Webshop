@@ -1,21 +1,20 @@
 import {Component, inject} from '@angular/core';
-import {TranslatePipe} from "@ngx-translate/core";
-import {RouterLink} from "@angular/router";
-import {NgIf} from "@angular/common";
 import {UserService} from "../services/user.service";
+import {NgIf} from "@angular/common";
+import {RouterLink} from "@angular/router";
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
-  selector: 'app-adminpaneel',
-  standalone: true,
+  selector: 'app-promocode-beheer-paneel-page',
   imports: [
-    TranslatePipe,
+    NgIf,
     RouterLink,
-    NgIf
+    TranslatePipe
   ],
-  templateUrl: './adminpaneel.component.html',
-  styleUrl: './adminpaneel.component.scss'
+  templateUrl: './promocode-beheer-paneel-page.component.html',
+  styleUrl: './promocode-beheer-paneel-page.component.scss'
 })
-export class AdminpaneelComponent {
+export class PromocodeBeheerPaneelPageComponent {
   protected userService = inject(UserService);
 
   protected hasInsightRights(): boolean {
@@ -35,6 +34,9 @@ export class AdminpaneelComponent {
 
   protected hasPromocodeManagementRights(): boolean {
     const roles = this.userService.getUserRoles();
-    return roles.includes('All_insights') || roles.includes('Make_and_deactivate_promocodes') || roles.includes('Insight_promocode_usage') || roles.includes('SuperAdmin');
+    return roles.includes('All_insights') ||
+           roles.includes('Make_and_deactivate_promocodes') ||
+           roles.includes('Insight_promocode_usage') ||
+           roles.includes('SuperAdmin');
   }
 }
