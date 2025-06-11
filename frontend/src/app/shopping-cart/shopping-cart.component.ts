@@ -42,6 +42,17 @@ export class ShoppingCartComponent implements OnInit {
   protected removeProduct(productId: number): void{
     this.cartService.removeFromCart(productId);
     this.updateTotalPrice();
+
+      // If cart is empty, reset discount
+      if (this.cart().length === 0) {
+          this.discount = 0;
+          this.appliedDiscountValue = 0;
+          this.promocodeApplied = false;
+          localStorage.removeItem('promocodeApplied');
+          localStorage.removeItem('appliedDiscountValue');
+          this.cartService.setDiscountValue(0);
+      }
+
     this.showSuccess("Product removed");
   }
 
