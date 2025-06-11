@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {ShoppingCartService} from '../services/shopping-cart.service';
 import { NgIf, NgFor } from '@angular/common';
 import {RouterModule} from '@angular/router';
@@ -13,7 +13,7 @@ import {PromocodeService} from "../services/promocode.service";
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.scss'
 })
-export class ShoppingCartComponent {
+export class ShoppingCartComponent implements OnInit {
   private cartService = inject(ShoppingCartService);
   private toastrService = inject(ToastrService);
   private promocodeService = inject(PromocodeService);
@@ -25,18 +25,18 @@ export class ShoppingCartComponent {
   totalPrice: number = 0;
   promoCode: any;
 
-  constructor() {
-    this.updateTotalPrice();
-    const applied = localStorage.getItem('promocodeApplied');
+  ngOnInit() {
+      const applied = localStorage.getItem('promocodeApplied');
       if (applied === 'true') {
           this.promocodeApplied = true;
           this.appliedDiscountValue = Number(localStorage.getItem('appliedDiscountValue')) || 0;
           this.discount = this.appliedDiscountValue;
       } else {
-            this.promocodeApplied = false;
-            this.appliedDiscountValue = 0;
-            this.discount = 0;
+          this.promocodeApplied = false;
+          this.appliedDiscountValue = 0;
+          this.discount = 0;
       }
+      this.updateTotalPrice();
   }
 
   protected removeProduct(productId: number): void{
@@ -64,10 +64,10 @@ export class ShoppingCartComponent {
   //   return this.cart().reduce((total, item) => total + item.product.price * item.quantity, 0);
   // }
 
-  private updateTotalPrice(): void {
-    const baseTotal = this.cart().reduce((total, item) => total + item.product.price * item.quantity, 0);
-    this.totalPrice = baseTotal - this.discount;
-  }
+    private updateTotalPrice(): void {
+        const baseTotal = this.cart().reduce((total, item) => total + item.product.price * item.quantity, 0);
+        this.totalPrice = Math.max(0, baseTotal - this.discount);
+    }
 
 
 
