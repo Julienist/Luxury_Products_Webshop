@@ -12,13 +12,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+import static org.assertj.core.api.AssertionsForClassTypes.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
+@ActiveProfiles("test")
 @ExtendWith(MockitoExtension.class)
 public class TestValidation {
 
@@ -58,6 +61,12 @@ public class TestValidation {
 
         //Act & Assert
         assertDoesNotThrow(() -> validatorService.validatePromocodeOnCreation(validRequest));
+        verify(promocodeRepository, times(1)).existsByCode("PROMO123");
+        verify(productRepository, times(1)).existsByName("TestProduct");
+
+        // Assert
+        assertEquals("PROMO123", validRequest.getCode());
+
     }
 
     @Test
@@ -66,10 +75,12 @@ public class TestValidation {
         // Arrange
         when(promocodeRepository.existsByCode("PROMO123")).thenReturn(true);
 
-        // Act & Assert
+        // Act
         Exception ex = assertThrows(IllegalArgumentException.class, () ->
                 validatorService.validatePromocodeOnCreation(validRequest));
-        assertTrue(ex.getMessage().contains("bestaat al"));
+
+        // Assert
+        assertEquals("Fout bij het aanmaken van de promocode: Promocode bestaat al.", ex.getMessage());
     }
 
     @Test
@@ -84,7 +95,7 @@ public class TestValidation {
         Exception ex = assertThrows(IllegalArgumentException.class, () ->
                 validatorService.validatePromocodeOnCreation(validRequest));
         // Assert
-        assertTrue(ex.getMessage().contains("Minimale bestelwaarde moet groter zijn dan of gelijk aan 0."));
+        assertEquals("Fout bij het aanmaken van de promocode: Minimale bestelwaarde moet groter zijn dan of gelijk aan 0.", ex.getMessage());
     }
 
     @Test
@@ -97,7 +108,8 @@ public class TestValidation {
         // Act & Assert
         Exception ex = assertThrows(IllegalArgumentException.class, () ->
                 validatorService.validatePromocodeOnCreation(validRequest));
-        assertTrue(ex.getMessage().contains("bestaat niet"));
+
+        assertEquals("Fout bij het aanmaken van de promocode: De opgegeven product 'TestProduct' bestaat niet.", ex.getMessage());
     }
 
     @Test
@@ -111,7 +123,7 @@ public class TestValidation {
         // Act & Assert
         Exception ex = assertThrows(IllegalArgumentException.class, () ->
                 validatorService.validatePromocodeOnCreation(validRequest));
-        assertTrue(ex.getMessage().contains("Kortingstype mag niet leeg zijn."));
+        assertEquals("Fout bij het aanmaken van de promocode: Kortingstype mag niet leeg zijn.", ex.getMessage());
     }
 
     @Test
@@ -127,7 +139,7 @@ public class TestValidation {
         Exception ex = assertThrows(IllegalArgumentException.class, () ->
                 validatorService.validatePromocodeOnCreation(validRequest));
         // Assert
-        assertTrue(ex.getMessage().contains("Vervaldatum kan niet voor de aanmaakdatum liggen."));
+        assertEquals("Fout bij het aanmaken van de promocode: Vervaldatum kan niet voor de aanmaakdatum liggen.", ex.getMessage());
     }
 
     @Test
@@ -143,7 +155,7 @@ public class TestValidation {
                 validatorService.validatePromocodeOnCreation(validRequest));
 
         // Assert
-        assertTrue(ex.getMessage().contains("Maximaal aantal keren dat de promocode per gebruiker gebruikt kan worden moet groter zijn dan 0."));
+        assertEquals("Fout bij het aanmaken van de promocode: Maximaal aantal keren dat de promocode per gebruiker gebruikt kan worden moet groter zijn dan 0.", ex.getMessage());
     }
 
     @Test
@@ -155,7 +167,21 @@ public class TestValidation {
 
         // Act & Assert
         assertDoesNotThrow(() -> validatorService.validatePromocodeOnCreation(validRequest));
+        verify(promocodeRepository, times(1)).existsByCode("PROMO123");
+        verify(productRepository, times(1)).existsByName("TestProduct");
     }
 
-    // ...add more tests for other validation rules as needed...
+    @Test
+    @Tag("Validation")
+    void When_DiscountValueIsZeroOrNegative_ThrowsException() {
+        // Arrange
+        validRequest.setDiscountValue(BigDecimal.ZERO);
+        when(promocodeRepository.existsByCode("PROMO123")).thenReturn(false);
+        when(productRepository.existsByName("TestProduct")).thenReturn(true);
+
+        // Act & Assert
+        assertThatThrownBy(() -> validatorService.validatePromocodeOnCreation(validRequest))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("Korting moet groter zijn dan 0.");
+    }
 }
