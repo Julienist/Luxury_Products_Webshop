@@ -4,7 +4,7 @@ describe('Promocode form testen', () => {
         cy.intercept('GET', '/api/categories', { fixture: '/categories.json' }).as('categoriesRequest');
         cy.intercept('POST', '/api/promocodes', { fixture: '/promocode.json' }).as('promocodeRequest');
         cy.loginAsSuperAdmin();
-        cy.visit('/make_promocode');
+        cy.visit('/promocode_beheer/make_promocode');
     });
 
     //!!! zet voor elke .type() een .focus() ervoor, anders werkt het niet in de test.
