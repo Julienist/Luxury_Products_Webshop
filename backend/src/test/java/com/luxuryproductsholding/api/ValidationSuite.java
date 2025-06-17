@@ -8,6 +8,6 @@ import org.springframework.test.context.ActiveProfiles;
 @Suite
 @SelectPackages("com.luxuryproductsholding.api.testclasses")
 @ActiveProfiles("test")
-@IncludeTags("validation")
+@IncludeTags({"Validation", "usage"})
 public class ValidationSuite {
 }
