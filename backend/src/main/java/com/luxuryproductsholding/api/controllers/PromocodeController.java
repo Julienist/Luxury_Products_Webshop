@@ -1,6 +1,8 @@
 package com.luxuryproductsholding.api.controllers;
 
 import com.luxuryproductsholding.api.DTO.*;
+import com.luxuryproductsholding.api.models.Promocode;
+import com.luxuryproductsholding.api.models.PromocodeUsageLog;
 import com.luxuryproductsholding.api.services.PromocodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +30,7 @@ public class PromocodeController {
         try {
             promocodeService.createPromocodeAfterValidation(promocodeRequest);
             return ResponseEntity.ok("Promocode is valid and created.");
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
@@ -38,7 +40,7 @@ public class PromocodeController {
         try {
             PromocodeResponse response = promocodeService.validatePromocode(dto);
             return ResponseEntity.ok(response);
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             return ResponseEntity.ok(new PromocodeResponse(BigDecimal.ZERO, false, e.getMessage()));
         }
     }
@@ -60,9 +62,30 @@ public class PromocodeController {
         try {
             promocodeService.disablePromocode(code);
             return ResponseEntity.ok("Promocode disabled successfully.");
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
+    @GetMapping("/all")
+    @PreAuthorize("hasRole('SuperAdmin') or hasRole('All_insights')")
+    public ResponseEntity<?> getAllExistingPromocodeData() {
+        try {
+            List<Promocode> promocodes = promocodeService.getAllPromocodeData();
+            return ResponseEntity.ok(promocodes);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/allusage")
+    @PreAuthorize("hasRole('SuperAdmin') or hasRole('All_insights') or hasRole('Insight_promocode_usage')")
+    public ResponseEntity<?> getAllPromocodeUsageLogging() {
+        try {
+            List<PromocodeUsageLog> promocodeLogs = promocodeService.getAllPromocodeUsageLogging();
+            return ResponseEntity.ok(promocodeLogs);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

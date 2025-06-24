@@ -90,7 +90,7 @@ public class PromocodeValidatorService {
                 return calculator.calculateDiscount(promocode, order);
             }
             boolean calcResult = calculator.isApplicable(promocode, order, email);
-            System.out.println(STR."Calculator: \{calculator.getClass().getSimpleName()} → \{calcResult}");
+            System.out.println("Calculator: " + calculator.getClass().getSimpleName() + " → " + calcResult);
         }
         return BigDecimal.ZERO;
     }

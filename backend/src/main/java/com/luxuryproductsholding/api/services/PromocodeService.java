@@ -7,9 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class PromocodeService {
@@ -23,6 +22,8 @@ public class PromocodeService {
 
     @Autowired
     private final ProductRepository productRepository;
+    @Autowired
+    private PromocodeUsageLogRepository promocodeUsageLogRepository;
 
     public PromocodeService(PromocodeValidatorService validatorService,
                             PromocodeUsageLogRepository logRepository,
@@ -155,5 +156,31 @@ public class PromocodeService {
 
         promocode.setActive(false);
         promocodeRepository.save(promocode);
+    }
+
+    public List<Promocode> getAllPromocodeData() {
+        List<Promocode> promocodes = promocodeRepository.findAll();
+
+        if (promocodes.isEmpty()) {
+            throw new RuntimeException("Er bestaat geen promocode");
+        }
+
+        if (promocodes.stream().noneMatch(Promocode::isActive)) {
+            throw new RuntimeException("Geen actieve promocodes");
+        }
+
+        return promocodes.stream()
+                .filter(Promocode::isActive)
+                .collect(Collectors.toList());
+    }
+
+    public List<PromocodeUsageLog> getAllPromocodeUsageLogging() {
+        List<PromocodeUsageLog> promocodeUsageLogs = promocodeUsageLogRepository.findAll();
+
+        if (promocodeUsageLogs.isEmpty()) {
+            throw new RuntimeException("Geen promocodelogs");
+        }
+
+        return promocodeUsageLogs;
     }
 }
