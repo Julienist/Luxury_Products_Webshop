@@ -1,5 +1,6 @@
 package com.luxuryproductsholding.api.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,9 +38,11 @@ public class Promocode {
     private Integer maxUsesPerEmail;
 
     @ManyToMany
+    @JsonBackReference
     private Set<Product> applicableProducts;
 
     @ManyToMany
+    @JsonBackReference
     private Set<Category> applicableCategories;
 
     public Promocode(String code, boolean active,

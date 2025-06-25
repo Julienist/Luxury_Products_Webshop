@@ -45,7 +45,7 @@ export class LoginComponent {
           this.cartService.setUser(userId);
           this.router.navigate(["products"]);
         }else{
-          console.error("No userId recieved from LoginResponse");
+          console.error();
         }
       },
       error: (error) => {

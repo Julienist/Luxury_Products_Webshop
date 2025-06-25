@@ -7,6 +7,8 @@ import { PromocodeRequest } from "../models/PromocodeRequest";
 import { environment } from "../../environments/environment";
 import { ShoppingCartService } from "./shopping-cart.service";
 import { PromocodeIntermediaryRequest } from "../models/PromocodeIntermediaryRequest";
+import {ExistingPromocode} from "../models/ExistingPromocode";
+import {ExistingPromocodeUsage} from "../models/ExistingPromocodeUsage";
 
 @Injectable({
     providedIn: 'root'
@@ -52,7 +54,7 @@ export class PromocodeService {
         ).pipe(
             map(codes => ({ promoCodes: codes })),
             catchError(error => {
-                console.error('Error fetching promocodes:', error);
+                console.error(error);
                 // Return an empty list as a fallback
                 return of({ promoCodes: [] });
             })
@@ -78,8 +80,37 @@ export class PromocodeService {
             { responseType: 'text' as 'json' }
         ).pipe(
             catchError(error => {
-                console.error('Error deactivating promocode:', error);
+                console.error(error);
                 return of('Failed to deactivate promocode');
+            })
+        );
+    }
+
+    public getAllExisitingPromocodeData(): Observable<string | ExistingPromocode[]> {
+        return this.httpClient.get<ExistingPromocode[]>(
+            environment.baseApiUrl + '/promocodes/all',
+        ).pipe(
+            catchError(error => {
+                if (error && error.error) {
+                    return of(error.error);
+                }
+                // console.error(error);
+                return of('Failed to fetch promocode data');
+            })
+        );
+    }
+
+    public getAllPromocodeUsageData(): Observable<string | ExistingPromocodeUsage[]> {
+        return this.httpClient.get<ExistingPromocodeUsage[]>(
+            environment.baseApiUrl + '/promocodes/allusage',
+        ).pipe(
+            catchError(error => {
+                // console.error(error);
+                // If the error response contains an 'error' field, return its value
+                if (error && error.error) {
+                    return of(error.error);
+                }
+                return of('Failed to fetch promocode usage data');
             })
         );
     }
