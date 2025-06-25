@@ -16,13 +16,20 @@ import {
   hasMakeDeactivateRights,
   hasUsageInsightsRights,
   superAdminGuard,
-  hasPromocodeManagementRights, superAdminOrMakeDeactivateGuard, superAdminOrHasInsightOrUsageRightsGuard
+  hasPromocodeManagementRights,
+  superAdminOrMakeDeactivateGuard,
+  superAdminOrHasInsightOrUsageRightsGuard,
+  superAdminOrHasInsightRightsGuard
 } from "./services/admin.guard";
 import {DeactivatePromocodePageComponent} from "./deactivate-promocode-page/deactivate-promocode-page.component";
 import {
   PromocodeBeheerPaneelPageComponent
 } from "./promocode-beheer-paneel-page/promocode-beheer-paneel-page.component";
 import {NgModule} from "@angular/core";
+import {AllPromocodesInsightPageComponent} from "./all-promocodes-insight-page/all-promocodes-insight-page.component";
+import {
+  AllPromocodeUsageInsightPageComponent
+} from "./all-promocode-usage-insight-page/all-promocode-usage-insight-page.component";
 
 export const routes: Routes = [
   {
@@ -74,17 +81,17 @@ export const routes: Routes = [
     component: MakePromocodePageComponent
   },
   // gecommenteerde routes zijn voor als maken van promotiecode mogelijk is.
-  // {
-  //   path: 'promocode_beheer/insight_all_promocodes',
-  //   redirectTo: 'insight_all_promocodes',
-  //   canActivate: [superAdminOrHasInsightRightsGuard],
-  // },
-  // {
-  //   path: 'promocode_beheer/insight_all_active_promocodes',
-  //   redirectTo: 'insight_all_active_promocodes',
-  //   canActivate: [superAdminOrHasInsightOrUsageRightsGuard]
-  //
-  // },
+  {
+    path: 'promocode_beheer/insight_all_promocodes',
+    component: AllPromocodesInsightPageComponent,
+    canActivate: [superAdminOrHasInsightRightsGuard],
+  },
+  {
+    path: 'promocode_beheer/insight_all_active_promocodes',
+    component: AllPromocodeUsageInsightPageComponent,
+    canActivate: [superAdminOrHasInsightOrUsageRightsGuard]
+
+  },
   {
     path: 'promocode_beheer/deactivate_promocodes',
     canActivate: [superAdminOrMakeDeactivateGuard],
