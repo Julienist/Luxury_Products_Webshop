@@ -61,7 +61,7 @@
   "promoc_manage": {
     "make_promoc": "Mache einen Promo-Code",
     "see_all_promoc": "Alle Promo-Codes ansehen",
-    "see_all_act_promoc": "Alle aktiven Promo-Codes ansehen",
+    "see_all_act_promoc": "Alle verwendeten Promocodes anzeigen",
     "deact_promoc": "Deaktiviere Promo-Code",
     "go_back": "Zurück zum Admin-Panel"
   },
