@@ -1,9 +1,12 @@
 import {Component, inject} from '@angular/core';
-import {TranslatePipe, TranslateService} from '@ngx-translate/core';
+import {TranslateService} from '@ngx-translate/core';
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-switch-language',
-  imports: [],
+    imports: [
+        NgOptimizedImage
+    ],
   templateUrl: './switch-language.component.html',
   styleUrl: './switch-language.component.scss'
 })

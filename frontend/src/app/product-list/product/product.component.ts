@@ -5,10 +5,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/product.service';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateModule} from '@ngx-translate/core';
+import {NgOptimizedImage} from "@angular/common";
 
 @Component({
   selector: 'app-product',
-  imports: [TranslateModule],
+    imports: [TranslateModule, NgOptimizedImage],
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.scss']
 })

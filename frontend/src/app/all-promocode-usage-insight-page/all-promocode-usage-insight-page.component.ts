@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {Router, RouterLink} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {PromocodeService} from "../services/promocode.service";
 import {ExistingPromocodeUsage} from "../models/ExistingPromocodeUsage";
 import {
@@ -38,7 +38,6 @@ import {TranslatePipe} from "@ngx-translate/core";
   styleUrl: './all-promocode-usage-insight-page.component.scss'
 })
 export class AllPromocodeUsageInsightPageComponent implements OnInit {
-  private router = inject(Router);
   private promocodeService = inject(PromocodeService);
 
   displayedColumns: string[] = [
@@ -62,7 +61,7 @@ export class AllPromocodeUsageInsightPageComponent implements OnInit {
       },
       error: (error) => {
         this.errorMessage = 'An unexpected error occurred';
-        // console.error(error);
+        console.error(error);
       }
     });
   }

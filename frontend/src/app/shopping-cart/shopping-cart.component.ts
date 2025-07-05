@@ -1,6 +1,6 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {ShoppingCartService} from '../services/shopping-cart.service';
-import { NgIf, NgFor } from '@angular/common';
+import {NgIf, NgFor, NgOptimizedImage} from '@angular/common';
 import {RouterModule} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {TranslateModule} from '@ngx-translate/core';
@@ -9,7 +9,7 @@ import {PromocodeService} from "../services/promocode.service";
 
 @Component({
   selector: 'app-shopping-cart',
-    imports: [NgIf, NgFor, RouterModule, TranslateModule, FormsModule],
+    imports: [NgIf, NgFor, RouterModule, TranslateModule, FormsModule, NgOptimizedImage],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.scss'
 })

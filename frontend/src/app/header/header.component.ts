@@ -1,10 +1,8 @@
-import {Component, inject, signal} from '@angular/core';
-import {ShoppingCartService} from '../services/shopping-cart.service';
+import {Component, inject } from '@angular/core';
 import {Router, RouterModule} from '@angular/router';
 import {NgIf} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
 import {UserService} from '../services/user.service';
-import {SwitchLanguageComponent} from '../switch-language/switch-language.component';
 
 @Component({
   selector: 'app-header',

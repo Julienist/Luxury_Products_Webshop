@@ -31,12 +31,12 @@ select {
   color: #333;
   cursor: pointer;
   text-transform: uppercase;
-  box-shadow: 3px 3px 0px #2d2d2d;
+  box-shadow: 3px 3px 0 #2d2d2d;
   transition: all 0.3s ease;
 }
 
 select:hover {
   background: #ff9900;
   color: #fff;
-  box-shadow: 3px 3px 0px #000;
+  box-shadow: 3px 3px 0 #000;
 }

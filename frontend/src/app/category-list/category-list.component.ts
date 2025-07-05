@@ -1,5 +1,4 @@
 import {Component, DestroyRef, inject, OnInit, signal} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {Category} from '../models/Category';
 import {CategoryService} from '../services/category.service';
 import {NgFor} from '@angular/common';
@@ -18,7 +17,6 @@ export class CategoryListComponent implements OnInit {
 
   private categoryService = inject(CategoryService);
   private destroyRef = inject(DestroyRef);
-  private httpClient = inject(HttpClient);
 
   public ngOnInit(): void {
     this.isFetching.set(true);

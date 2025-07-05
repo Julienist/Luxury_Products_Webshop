@@ -5,7 +5,7 @@
     <div class="cart-items">
       <ul *ngIf="cart().length > 0; else emptyCart">
         <li *ngFor="let item of cart()">
-          <img [src]="item.product.imageUrl" [alt]="item.product.name">
+          <img [ngSrc]="item.product.imageUrl" [alt]="item.product.name" width="60" height="60">
           <div class="cart-details">
             <p>{{ item.product.name }}</p>
             <p>{{ '€' + item.product.price.toFixed(2) }}</p>

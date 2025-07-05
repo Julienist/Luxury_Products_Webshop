@@ -6,7 +6,6 @@ import {NgFor, NgIf} from '@angular/common';
 import {OrderService} from '../services/order.service';
 import {Order} from '../models/Order';
 import {TranslatePipe} from '@ngx-translate/core';
-import {SwitchLanguageComponent} from '../switch-language/switch-language.component';
 
 @Component({
   selector: 'app-user',

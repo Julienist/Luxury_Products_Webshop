@@ -1,6 +1,6 @@
 <div *ngIf="product; else loading" class="product-container">
   <div class="product-image">
-    <img [src]="product.imageUrl" [alt]="product.name" />
+    <img [ngSrc]="product.imageUrl" [alt]="product.name" width="300" height="100"/>
   </div>
 
   <div class="product-info">

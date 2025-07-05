@@ -1,7 +1,7 @@
 import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject, catchError, map, Observable} from 'rxjs';
 import {CustomUser} from '../models/CustomUser';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient } from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {UserRole} from "../models/ResponseAuthData";
 import {Router} from "@angular/router";
@@ -13,7 +13,6 @@ export class UserService {
   private httpClient = inject(HttpClient);
 
   private authTokenKey = 'authToken';
-  private roleKey = 'role';
   private userIdKey = 'loggedInUserId';
   private apiUrl = environment.baseApiUrl;
   private userRoles: string[] = [];

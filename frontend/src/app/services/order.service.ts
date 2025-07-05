@@ -1,11 +1,11 @@
 import {inject, Injectable} from '@angular/core';
 import {OrderRequest} from '../models/OrderRequest';
 import {ShoppingCartService} from './shopping-cart.service';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient } from '@angular/common/http';
 import {ResponseOrderData} from '../models/ResponseOrderData';
 import {Order} from '../models/Order';
 import {environment} from '../../environments/environment';
-import {catchError, Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'

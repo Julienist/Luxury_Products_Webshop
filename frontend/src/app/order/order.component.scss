@@ -6,7 +6,7 @@
   padding: 2rem;
   background: #f4f1de;
   border-radius: 16px;
-  box-shadow: 4px 4px 0px #3a3a3a;
+  box-shadow: 4px 4px 0 #3a3a3a;
   max-width: 900px;
   margin: auto;
   font-family: 'Press Start 2P', cursive;
@@ -15,7 +15,7 @@
 .order-title, .order-subtitle {
   font-size: 1.8rem;
   color: #d62828;
-  text-shadow: 2px 2px 0px #3a3a3a;
+  text-shadow: 2px 2px 0 #3a3a3a;
 }
 
 .order-label {
@@ -31,7 +31,7 @@
   color: #000;
   border: 3px solid #3a3a3a;
   border-radius: 8px;
-  box-shadow: 4px 4px 0px #3a3a3a;
+  box-shadow: 4px 4px 0 #3a3a3a;
 }
 
 .order-button {
@@ -41,7 +41,7 @@
   padding: 0.8rem 1.5rem;
   border: 3px solid #3a3a3a;
   border-radius: 8px;
-  box-shadow: 4px 4px 0px #3a3a3a;
+  box-shadow: 4px 4px 0 #3a3a3a;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
@@ -59,7 +59,7 @@
   padding: 1rem;
   border-radius: 12px;
   border: 4px solid #3a3a3a;
-  box-shadow: 4px 4px 0px #3a3a3a;
+  box-shadow: 4px 4px 0 #3a3a3a;
 }
 
 .order-item {
@@ -68,7 +68,7 @@
   background: #ddd;
   padding: 10px;
   border-radius: 8px;
-  box-shadow: 2px 2px 0px #3a3a3a;
+  box-shadow: 2px 2px 0 #3a3a3a;
 }
 
 .order-id, .order-total {

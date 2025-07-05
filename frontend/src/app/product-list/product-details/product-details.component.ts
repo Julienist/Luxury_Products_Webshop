@@ -2,14 +2,14 @@ import {Component, inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../models/Product';
 import { ProductService } from '../../services/product.service';
-import {NgIf} from '@angular/common';
+import {NgIf, NgOptimizedImage} from '@angular/common';
 import {ShoppingCartService} from '../../services/shopping-cart.service';
 import {TranslateModule} from '@ngx-translate/core';
 import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [NgIf, TranslateModule],
+  imports: [NgIf, TranslateModule, NgOptimizedImage],
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss']
 })

@@ -1,11 +1,8 @@
-import {Component, inject, signal} from '@angular/core';
+import {Component, inject } from '@angular/core';
 import {OrderService} from '../services/order.service';
 import {ShoppingCartService} from '../services/shopping-cart.service';
-import {LoginService} from '../services/login.service';
-import {Order} from '../models/Order';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router, RouterModule} from '@angular/router';
-import {NgFor, NgIf} from '@angular/common';
 import {TranslateModule} from '@ngx-translate/core';
 import {UserService} from '../services/user.service';
 

@@ -1,5 +1,5 @@
 <li class="product" (click)="goToProduct(product.id)">
-  <img [src]="product.imageUrl" [alt]="product.name" />
+  <img [ngSrc]="product.imageUrl" [alt]="product.name" width="180" height="180"/>
   <p>{{ product.name }}</p>
   <p>{{ '€' + product.price }}</p>
 

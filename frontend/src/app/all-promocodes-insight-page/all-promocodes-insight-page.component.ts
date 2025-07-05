@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {Router, RouterLink} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {PromocodeService} from "../services/promocode.service";
 import {ExistingPromocode} from "../models/ExistingPromocode";
 import {
@@ -39,7 +39,6 @@ import {TranslatePipe} from "@ngx-translate/core";
   styleUrl: './all-promocodes-insight-page.component.scss'
 })
 export class AllPromocodesInsightPageComponent implements OnInit {
-  private router = inject(Router);
   private promocodeService = inject(PromocodeService);
   displayedColumns: string[] = [
     'id', 'code', 'active', 'creationDate', 'expiryDate',
@@ -64,7 +63,7 @@ export class AllPromocodesInsightPageComponent implements OnInit {
       },
       error: (error) => {
         this.errorMessage = 'Failed to load promocodes';
-        // console.log(error);
+        console.log(error);
       }
     });
   }
