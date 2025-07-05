@@ -55,6 +55,7 @@ export class RegisterComponent {
       next: (resData): void => {
         const userId = resData.userId;
         if (userId) {
+          this.cartService.transferGuestCartToUser(userId);
           this.cartService.setUser(userId);
           this.router.navigate(["products"]);
         }},

@@ -51,7 +51,7 @@ export class ProductComponent implements OnInit {
   }
 
   protected showSuccess(message: string): void {
-    this.toastrService.success(`<b>${message}</b>`, 'Success!', {
+    this.toastrService.success(`<b>${message}</b>`, '', {
       toastClass: 'custom-toast-class',
       enableHtml: true,
     });

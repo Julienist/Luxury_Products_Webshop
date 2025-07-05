@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {PromocodeService} from "../services/promocode.service";
 import {ExistingPromocodeUsage} from "../models/ExistingPromocodeUsage";
 import {
@@ -12,6 +12,8 @@ import {
   MatRow, MatRowDef, MatTable
 } from "@angular/material/table";
 import {NgIf} from "@angular/common";
+import {MatButton} from "@angular/material/button";
+import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-all-promocode-usage-insight-page',
@@ -26,7 +28,10 @@ import {NgIf} from "@angular/common";
     MatRowDef,
     MatTable,
     NgIf,
-    MatHeaderCellDef
+    MatHeaderCellDef,
+    MatButton,
+    TranslatePipe,
+    RouterLink
   ],
   templateUrl: './all-promocode-usage-insight-page.component.html',
   styleUrl: './all-promocode-usage-insight-page.component.scss'

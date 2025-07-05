@@ -113,7 +113,7 @@ export class MakePromocodePageComponent implements OnInit {
                 next: (response) => {
                     this.toastrService.success(
                         `<b>Promocode created successfully:</b> ${JSON.stringify(response)}`,
-                        'Success!',
+                        '',
                         { toastClass: 'custom-toast-class', enableHtml: true, timeOut: 5000 }
                     );
                     this.onReturn();
@@ -138,6 +138,6 @@ export class MakePromocodePageComponent implements OnInit {
     }
 
     onReturn() {
-        this.router.navigate(['adminpanel/promocode_beheer']);
+        this.router.navigate(['admin/promocodes']);
     }
 }

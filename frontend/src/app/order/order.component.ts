@@ -35,8 +35,6 @@ export class OrderComponent {
   });
 
   protected submitOrder(): void {
-    localStorage.removeItem('promocodeApplied');
-    localStorage.removeItem('appliedDiscountValue');
     const userId = this.userService.getUserId();
     const userIdAsNumber = Number(userId);
     if (isNaN(userIdAsNumber)) {
@@ -48,6 +46,7 @@ export class OrderComponent {
     this.orderService.createOrder(userIdAsNumber, shippingAddress, this.discountValue).subscribe({
       next: (resData) => {
         this.cartService.clearCart();
+        this.cartService.deletePromocodeLocalStorageData();
         this.goToUser(resData.user.id);
       },
       error: (err) => {

@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 import {PromocodeService} from "../services/promocode.service";
 import {ExistingPromocode} from "../models/ExistingPromocode";
 import {
@@ -12,23 +12,28 @@ import {
   MatTable
 } from "@angular/material/table";
 import {NgIf} from "@angular/common";
+import {MatButton} from "@angular/material/button";
+import {TranslatePipe} from "@ngx-translate/core";
 
 
 @Component({
   selector: 'app-all-promocodes-insight-page',
-  imports: [
-    MatColumnDef,
-    MatHeaderCell,
-    MatCell,
-    MatTable,
-    MatCellDef,
-    MatHeaderCellDef,
-    MatHeaderRow,
-    MatRowDef,
-    MatHeaderRowDef,
-    MatRow,
-    NgIf
-  ],
+    imports: [
+        MatColumnDef,
+        MatHeaderCell,
+        MatCell,
+        MatTable,
+        MatCellDef,
+        MatHeaderCellDef,
+        MatHeaderRow,
+        MatRowDef,
+        MatHeaderRowDef,
+        MatRow,
+        NgIf,
+        MatButton,
+        RouterLink,
+        TranslatePipe
+    ],
   templateUrl: './all-promocodes-insight-page.component.html',
   styleUrl: './all-promocodes-insight-page.component.scss'
 })

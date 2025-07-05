@@ -66,34 +66,34 @@ export const routes: Routes = [
     component: UserComponent,
   },
   {
-    path: 'adminpanel',
+    path: 'admin',
     component: AdminpaneelComponent,
     canActivate: [adminGuard]
   },
   {
-    path: 'adminpanel/promocode_beheer',
+    path: 'admin/promocodes',
     component: PromocodeBeheerPaneelPageComponent,
     canActivate: [hasPromocodeManagementRights]
   },
   {
-    path: 'promocode_beheer/make_promocode',
+    path: 'promocodes/new',
     canActivate: [superAdminOrMakeDeactivateGuard],
     component: MakePromocodePageComponent
   },
   // gecommenteerde routes zijn voor als maken van promotiecode mogelijk is.
   {
-    path: 'promocode_beheer/insight_all_promocodes',
+    path: 'promocodes/insight-all-promocodes',
     component: AllPromocodesInsightPageComponent,
     canActivate: [superAdminOrHasInsightRightsGuard],
   },
   {
-    path: 'promocode_beheer/insight_all_active_promocodes',
+    path: 'promocodes/insight-all-active-promocodes',
     component: AllPromocodeUsageInsightPageComponent,
     canActivate: [superAdminOrHasInsightOrUsageRightsGuard]
 
   },
   {
-    path: 'promocode_beheer/deactivate_promocodes',
+    path: 'promocodes/deactivate',
     canActivate: [superAdminOrMakeDeactivateGuard],
     component: DeactivatePromocodePageComponent
   }

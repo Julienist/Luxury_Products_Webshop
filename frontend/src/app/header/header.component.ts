@@ -29,6 +29,11 @@ export class HeaderComponent {
     this.router.navigate(['/user/' + userId]);
   }
 
+  protected isLoggedIn(): boolean {
+    const userId = this.userService.getUserId();
+    return userId !== null && userId !== 'guest';
+  }
+
   protected isAdmin(): boolean {
     const roles = this.userService.getUserRoles();
     return roles.includes('Admin');

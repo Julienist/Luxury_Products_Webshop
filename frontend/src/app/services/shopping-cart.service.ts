@@ -18,6 +18,8 @@ export class ShoppingCartService {
     const savedUserId = localStorage.getItem('loggedInUserId');
     if (savedUserId) {
       this.setUser(savedUserId);
+    } else {
+      this.setUser('guest');
     }
 
     effect(() => {
@@ -25,6 +27,9 @@ export class ShoppingCartService {
         this.saveCartToLocalStorage();
       }
     });
+
+    // load cart state from localstorage
+    this.loadCartFromLocalStorage();
   }
 
   public setUser(userId: string): void {
@@ -41,7 +46,7 @@ export class ShoppingCartService {
     const existingItem = this.cart().find(item => item.product.id === product.id);
 
     if (existingItem) {
-      existingItem.quantity += 1;
+      existingItem.quantity++;
     } else {
       this.cart.set([...this.cart(), { product, quantity: 1 }]);
     }
@@ -55,13 +60,11 @@ export class ShoppingCartService {
   }
 
   public increaseQuantity(productId: number): void {
-    const removedItem = this.cart().find(item => item.product.id === productId);
-    if (!removedItem) {
-      this.cart.set(this.cart().map(item =>
-        item.product.id === productId ? { ...item, quantity: item.quantity + 1 } : item,
-      ));
+    const item = this.cart().find(item => item.product.id === productId);
+    if (item) {
+      item.quantity++;
+      this.saveCartToLocalStorage();
     }
-    this.saveCartToLocalStorage();
   }
 
   public decreaseQuantity(productId: number): void {
@@ -77,6 +80,11 @@ export class ShoppingCartService {
   public clearCart(): void {
     this.cart.set([]);
     this.saveCartToLocalStorage();
+  }
+
+  public deletePromocodeLocalStorageData(): void {
+    localStorage.removeItem('promocodeApplied');
+    localStorage.removeItem('appliedDiscountValue');
   }
 
   private saveCartToLocalStorage(): void {
@@ -97,5 +105,16 @@ export class ShoppingCartService {
 
   private getCartKey(): string {
     return `shoppingCart_${this.userId}`;
+  }
+
+  public transferGuestCartToUser(userId: string): void {
+    const guestCartKey = 'shoppingCart_guest';
+    const userCartKey = `shoppingCart_${userId}`;
+    const guestCart = localStorage.getItem(guestCartKey);
+
+    if (guestCart) {
+      localStorage.setItem(userCartKey, guestCart);
+      localStorage.removeItem(guestCartKey); // remove guest cart after transfer.
+    }
   }
 }

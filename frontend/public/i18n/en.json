@@ -1,4 +1,7 @@
 {
+  "button":{
+    "return": "Go back"
+  },
   "user": {
     "info": "Your account"
   },

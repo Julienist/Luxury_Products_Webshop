@@ -4,6 +4,7 @@ import {CustomUser} from '../models/CustomUser';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {UserRole} from "../models/ResponseAuthData";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class UserService {
   private userIdKey = 'loggedInUserId';
   private apiUrl = environment.baseApiUrl;
   private userRoles: string[] = [];
+  private router = inject(Router);
 
 
   private loggedInSubject = new BehaviorSubject<boolean>(this.hasValidToken());
@@ -61,14 +63,22 @@ export class UserService {
     localStorage.removeItem('promocodeApplied');
     localStorage.removeItem('appliedDiscountValue');
     this.loggedInSubject.next(false);
+    this.router.navigate(["login"]);
   }
 
   private removeShoppingCartFromLocalStorage(): void {
     const userId = localStorage.getItem(this.userIdKey);
+    // if (userId) {
+    //   const cartKey = `shoppingCart_${userId}`;
+    //   localStorage.removeItem(cartKey);
+    // }
     if (userId) {
       const cartKey = `shoppingCart_${userId}`;
       localStorage.removeItem(cartKey);
     }
+    // always remove guest cart
+    const guestCartKey = `shoppingCart_guest`;
+    localStorage.removeItem(guestCartKey);
   }
 
   public hasValidToken(): boolean {
@@ -98,5 +108,4 @@ export class UserService {
     this.userRoles = roles.map(role => role.name);
     localStorage.setItem('userRoles', JSON.stringify(this.userRoles));
   }
-
 }

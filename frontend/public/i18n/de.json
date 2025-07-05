@@ -1,4 +1,7 @@
 {
+  "button":{
+    "return": "Geht zerug"
+  },
   "user": {
     "info": "Ihr konto"
   },

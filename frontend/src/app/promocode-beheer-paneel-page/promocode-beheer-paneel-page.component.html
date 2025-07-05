@@ -1,9 +1,9 @@
 <div class="ListOfAdminfunctionalities">
     <ul>
-        <li *ngIf="hasMakeDeactivateRights()"><a routerLink="/promocode_beheer/make_promocode">{{ 'promoc_manage.make_promoc' | translate }}</a></li>
-        <li *ngIf="hasInsightRights()"><a routerLink="/promocode_beheer/insight_all_promocodes">{{ 'promoc_manage.see_all_promoc' | translate }}</a></li>
-        <li *ngIf="hasInsightRights() && hasUsageInsightsRights()"><a routerLink="/promocode_beheer/insight_all_active_promocodes">{{ 'promoc_manage.see_all_act_promoc' | translate }}</a></li>
-        <li *ngIf="hasMakeDeactivateRights()"><a routerLink="/promocode_beheer/deactivate_promocodes">{{ 'promoc_manage.deact_promoc' | translate }}</a></li>
-        <li><a routerLink="/adminpanel">{{ 'promoc_manage.go_back' | translate }}</a></li>
+        <li *ngIf="hasMakeDeactivateRights()"><a routerLink="/promocodes/new">{{ 'promoc_manage.make_promoc' | translate }}</a></li>
+        <li *ngIf="hasInsightRights()"><a routerLink="/promocodes/insight-all-promocodes">{{ 'promoc_manage.see_all_promoc' | translate }}</a></li>
+        <li *ngIf="hasInsightRights() && hasUsageInsightsRights()"><a routerLink="/promocodes/insight-all-active-promocodes">{{ 'promoc_manage.see_all_act_promoc' | translate }}</a></li>
+        <li *ngIf="hasMakeDeactivateRights()"><a routerLink="/promocodes/deactivate">{{ 'promoc_manage.deact_promoc' | translate }}</a></li>
+        <li><a routerLink="/admin">{{ 'promoc_manage.go_back' | translate }}</a></li>
     </ul>
 </div>

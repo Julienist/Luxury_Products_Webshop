@@ -1,4 +1,7 @@
 {
+  "button":{
+    "return": "Ga terug"
+  },
   "user": {
     "info": "Jouw account"
   },

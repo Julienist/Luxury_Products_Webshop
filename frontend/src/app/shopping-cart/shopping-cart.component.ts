@@ -45,12 +45,7 @@ export class ShoppingCartComponent implements OnInit {
 
       // If cart is empty, reset discount
       if (this.cart().length === 0) {
-          this.discount = 0;
-          this.appliedDiscountValue = 0;
-          this.promocodeApplied = false;
-          localStorage.removeItem('promocodeApplied');
-          localStorage.removeItem('appliedDiscountValue');
-          this.cartService.setDiscountValue(0);
+          this.deletePromocodeData();
       }
 
     this.showSuccess("Product removed");
@@ -68,7 +63,17 @@ export class ShoppingCartComponent implements OnInit {
 
   protected clearCart(): void {
     this.cartService.clearCart();
+    this.deletePromocodeData();
     this.showSuccess("Cart cleared");
+  }
+
+  protected deletePromocodeData(): void {
+      this.discount = 0;
+      this.appliedDiscountValue = 0;
+      this.promocodeApplied = false;
+      localStorage.removeItem('promocodeApplied');
+      localStorage.removeItem('appliedDiscountValue');
+      this.cartService.setDiscountValue(0);
   }
 
   // protected getTotalPrice(): number {
@@ -110,7 +115,7 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   public showSuccess(message: string): void {
-    this.toastrService.success(`<b>${message}</b>`, 'Success!', {
+    this.toastrService.success(`<b>${message}</b>`, '', {
       toastClass: 'custom-toast-class',
       enableHtml: true,
       timeOut: 5000,
