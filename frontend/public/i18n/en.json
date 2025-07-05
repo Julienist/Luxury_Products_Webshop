@@ -97,6 +97,20 @@
     "deactivate_button": "Deactivate promo code",
     "cancel_button": "Cancel and go back"
   },
+  "tables_promocodes": {
+    "all_promocodes": "All promo codes",
+    "all_used_promocodes": "All used promo codes",
+    "active": "Is active",
+    "creationDate": "Creation date",
+    "expirationDate": "Expiration date",
+    "discountType": "Discount type",
+    "discountValue": "Discount value",
+    "minOrderAmount": "Min. order amount",
+    "usedCount": "Used count",
+    "maxUsesEmail": "Max uses/email",
+    "usedAt": "Used at",
+    "discountApplied": "Used promo code"
+  },
   "return": "Return",
   "footer": {
     "copyright": "© 2025 Luxury Products"

@@ -1,7 +1,7 @@
 //@import "../../styles";
-@use "../../styles" as styles;
+@use "../../styles" as mixins;
 .home-main {
-  font-family: styles.$retro-font;
+  font-family: mixins.$retro-font;
   color: #f0f0f0;
   background: #1c1c1c;
   padding: 40px 10%;
@@ -18,7 +18,7 @@
   h1 {
     font-size: 2.5rem;
     color: #ffcc00;
-    text-shadow: 2px 2px 0px #7a0000;
+    text-shadow: 2px 2px 0 #7a0000;
   }
 
   p {
@@ -40,13 +40,13 @@
     border: 2px solid #7a0000;
     border-radius: 5px;
     text-decoration: none;
-    box-shadow: 4px 4px 0px #2d2d2d;
+    box-shadow: 4px 4px 0 #2d2d2d;
     transition: all 0.3s ease;
 
     &:hover {
       background: #ff9900;
       color: white;
-      box-shadow: 4px 4px 0px #000;
+      box-shadow: 4px 4px 0 #000;
       transform: translateY(-2px);
     }
   }
@@ -78,7 +78,7 @@
       margin-top: 15px;
       font-size: 1.3rem;
       color: #ffcc00;
-      text-shadow: 1px 1px 0px #7a0000;
+      text-shadow: 1px 1px 0 #7a0000;
     }
 
     p {

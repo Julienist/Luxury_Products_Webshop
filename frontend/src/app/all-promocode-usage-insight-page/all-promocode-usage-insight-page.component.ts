@@ -11,28 +11,29 @@ import {
   MatHeaderRowDef,
   MatRow, MatRowDef, MatTable
 } from "@angular/material/table";
-import {NgIf} from "@angular/common";
+import {DatePipe, NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {TranslatePipe} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-all-promocode-usage-insight-page',
-  imports: [
-    MatCell,
-    MatCellDef,
-    MatColumnDef,
-    MatHeaderCell,
-    MatHeaderRow,
-    MatHeaderRowDef,
-    MatRow,
-    MatRowDef,
-    MatTable,
-    NgIf,
-    MatHeaderCellDef,
-    MatButton,
-    TranslatePipe,
-    RouterLink
-  ],
+    imports: [
+        MatCell,
+        MatCellDef,
+        MatColumnDef,
+        MatHeaderCell,
+        MatHeaderRow,
+        MatHeaderRowDef,
+        MatRow,
+        MatRowDef,
+        MatTable,
+        NgIf,
+        MatHeaderCellDef,
+        MatButton,
+        TranslatePipe,
+        RouterLink,
+        DatePipe
+    ],
   templateUrl: './all-promocode-usage-insight-page.component.html',
   styleUrl: './all-promocode-usage-insight-page.component.scss'
 })

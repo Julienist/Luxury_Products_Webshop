@@ -97,6 +97,20 @@
     "deactivate_button": "Deactiveer promotiecode",
     "cancel_button": "Annuleer en ga terug"
   },
+  "tables_promocodes": {
+    "all_promocodes": "Alle promotiecodes",
+    "all_used_promocodes": "Alle gebruikte promotiecodes",
+    "active": "Is actief",
+    "creationDate": "aanmaakdatum",
+    "expirationDate": "verloopdatum",
+    "discountType": "Kortingstype",
+    "discountValue": "kortingsbedrag",
+    "minOrderAmount": "min. bestel bedrag",
+    "usedCount": "aantal keer gebruikt",
+    "maxUsesEmail": "max. gebruik/Email",
+    "usedAt": "gebruikt op",
+    "discountApplied": "Gebruikte promocode"
+  },
   "return": "Ga terug",
   "footer": {
     "copyright": "© 2025 Luxury Products"

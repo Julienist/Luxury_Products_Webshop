@@ -11,7 +11,7 @@ import {
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
   MatTable
 } from "@angular/material/table";
-import {NgIf} from "@angular/common";
+import {DatePipe, NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {TranslatePipe} from "@ngx-translate/core";
 
@@ -32,7 +32,8 @@ import {TranslatePipe} from "@ngx-translate/core";
         NgIf,
         MatButton,
         RouterLink,
-        TranslatePipe
+        TranslatePipe,
+        DatePipe
     ],
   templateUrl: './all-promocodes-insight-page.component.html',
   styleUrl: './all-promocodes-insight-page.component.scss'

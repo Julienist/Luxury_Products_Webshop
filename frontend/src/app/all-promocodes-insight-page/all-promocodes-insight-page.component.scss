@@ -1,0 +1,14 @@
+@use "../../styles" as mixins;
+
+
+h2 {
+  @include mixins.h2();
+}
+
+table {
+  @include mixins.retro-table();
+}
+
+button {
+  @include mixins.retro-button();
+}

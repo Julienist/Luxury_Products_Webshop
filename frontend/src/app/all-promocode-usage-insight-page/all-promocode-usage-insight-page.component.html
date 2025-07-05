@@ -1,4 +1,4 @@
-<h2>Alle gebruikte promocodes</h2>
+<h2>{{ 'tables_promocodes.all_used_promocodes' | translate }}</h2>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="!errorMessage">
 
     <ng-container matColumnDef="id">
@@ -7,12 +7,12 @@
     </ng-container>
 
     <ng-container matColumnDef="usedAt">
-        <th mat-header-cell *matHeaderCellDef> UsedAt </th>
-        <td mat-cell *matCellDef="let element"> {{element.usedAt}} </td>
+        <th mat-header-cell *matHeaderCellDef>{{ 'tables_promocodes.usedAt' | translate }}</th>
+        <td mat-cell *matCellDef="let element"> {{element.usedAt | date:'dd-MM-yyyy hh:mm' }} </td>
     </ng-container>
 
     <ng-container matColumnDef="discountApplied">
-        <th mat-header-cell *matHeaderCellDef> Discount Applied </th>
+        <th mat-header-cell *matHeaderCellDef>{{ 'tables_promocodes.discountApplied' | translate }}</th>
         <td mat-cell *matCellDef="let element"> {{element.discountApplied}} </td>
     </ng-container>
 
@@ -23,8 +23,7 @@
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<button mat-flat-button color="warn" type="button" name="return" routerLink="/admin/promocodes" >{{ 'button.return' | translate }}</button>
-
 <div *ngIf="errorMessage">
     {{ errorMessage }}
 </div>
+<button mat-raised-button color="warn" type="button" name="return" routerLink="/admin/promocodes" >{{ 'button.return' | translate }}</button>
