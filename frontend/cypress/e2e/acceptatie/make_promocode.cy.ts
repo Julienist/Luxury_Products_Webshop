@@ -4,7 +4,7 @@ describe('Promocode form testen', () => {
         cy.intercept('GET', '/api/categories', { fixture: '/categories.json' }).as('categoriesRequest');
         cy.intercept('POST', '/api/promocodes', { fixture: '/promocode.json' }).as('promocodeRequest');
         cy.loginAsSuperAdmin();
-        cy.visit('/promocode_beheer/make_promocode');
+        cy.visit('/promocodes/new');
     });
 
     //!!! zet voor elke .type() een .focus() ervoor, anders werkt het niet in de test.
@@ -82,7 +82,7 @@ describe('Promocode form testen', () => {
         cy.get('[name="submit"]').click();
 
         cy.wait('@promocodeRequest').its('response.statusCode').should('eq', 200);
-        cy.url().should('include', '/adminpanel')
+        cy.url().should('include', '/admin')
     });
 
     it('Annuleert formulier en reset velden', () => {
@@ -91,6 +91,6 @@ describe('Promocode form testen', () => {
 
         cy.get('[name="return"]').click();
 
-        cy.url().should('include', '/adminpanel');
+        cy.url().should('include', '/admin');
     });
 });

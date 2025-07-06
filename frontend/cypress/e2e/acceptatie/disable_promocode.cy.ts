@@ -6,7 +6,7 @@ describe('Promocode deactivation', () => {
         cy.intercept('GET', '/api/promocodes', {fixture: '/promocodes_list.json'}).as('promocodescodesRequest');
         cy.intercept('PUT','/api/promocodes/disable_promocode_*', {fixture: '/promocode_disabled_response.json'}).as('disabledResponse');
         cy.loginAsSuperAdmin();
-        cy.visit('/promocode_beheer/deactivate_promocodes');
+        cy.visit('/promocodes/deactivate');
         cy.wait(1000); // Brief pause to ensure page stability
     });
 
