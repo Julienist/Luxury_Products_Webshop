@@ -17,6 +17,7 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/${POSTGRES_DB}
       - SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
       - SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+      - jwt.secret=${jwt_secret}
     depends_on:
       - postgres
     env_file:
@@ -33,11 +34,6 @@ services:
       - backend
     networks:
       - app-network
-  # webinterface nodig?
-  # OOIT gehoord van psql?
-  # vooruit voor gemak:
-  # env. var's veranderen? Doe je toch niet...
-  #
   # pgadmin4:
   #   image: dpage/pgadmin4:latest
   #   environment:
@@ -49,9 +45,8 @@ services:
   #     - postgres
   #   networks:
   #     - app-network
-  #
-  # Voor als je postgres & pgadmin in 1 container wil,
-  # uncomment onderstaande:
+
+  # postgres & pgadmin in 1 container.
   # postgres_pgadmin:
   #   image: thajeztah/postgres-pgadmin
   #   ports:
