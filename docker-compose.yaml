@@ -1,4 +1,5 @@
 services:
+
   postgres:
     image: postgres:latest
     ports:
@@ -7,6 +8,7 @@ services:
       - .env
     networks:
       - app-network
+
   backend:
     build:
       context: ./backend
@@ -24,6 +26,7 @@ services:
       - .env
     networks:
       - app-network
+
   frontend:
     build:
       context: ./frontend
@@ -34,32 +37,7 @@ services:
       - backend
     networks:
       - app-network
-  # pgadmin4:
-  #   image: dpage/pgadmin4:latest
-  #   environment:
-  #     - PGADMIN_DEFAULT_EMAIL=admin@example.com
-  #     - PGADMIN_DEFAULT_PASSWORD=admin
-  #   ports:
-  #     - "5050:80"
-  #   depends_on:
-  #     - postgres
-  #   networks:
-  #     - app-network
 
-  # postgres & pgadmin in 1 container.
-  # postgres_pgadmin:
-  #   image: thajeztah/postgres-pgadmin
-  #   ports:
-  #     - "127.0.0.1:5433:5432"  # PostgreSQL
-  #     - "127.0.0.1:5051:80"    # pgAdmin
-  #   environment:
-  #     - POSTGRES_USER=${POSTGRES_USER}
-  #     - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-  #     - POSTGRES_DB=${POSTGRES_DB}
-  #     - PGADMIN_DEFAULT_EMAIL=admin@example.com
-  #     - PGADMIN_DEFAULT_PASSWORD=admin
-  #   networks:
-  #     - app-network
 networks:
   app-network:
     driver: bridge
