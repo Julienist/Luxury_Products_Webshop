@@ -1,5 +1,5 @@
 # Over deze repository
-Dit is de repository van Julien Mijnders (s1142531)
+Dit is de repository van Julien Mijnders (s1142531) - dit was een opdracht aan de hogeschool leiden
 Ik bouw in deze repo aan een webshop en verwerk daarin de feature "Promocodes".
 
 # Installeren
