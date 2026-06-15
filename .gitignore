@@ -1,0 +1,14 @@
+.env
+*.env.local
+
+/backend/target/
+
+/frontend/dist/
+/frontend/node_modules/
+
+.idea/
+*.iml
+.vscode/
+
+.DS_Store
+Thumbs.db
