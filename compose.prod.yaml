@@ -1,0 +1,14 @@
+services:
+  backend:
+    image: ghcr.io/Julienist/luxury-backend:latest
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    networks:
+      - app-network
+    restart: unless-stopped
+
+networks:
+  app-network:
+    driver: bridge

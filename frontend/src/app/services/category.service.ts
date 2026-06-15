@@ -12,7 +12,11 @@ export class CategoryService {
   selectedCategory = signal<Category | null>(null)
 
   private httpClient = inject(HttpClient);
-  private apiUrl = environment.baseApiUrl;
+  // private apiUrl = environment.baseApiUrl;
+
+  private get apiUrl(): string {
+    return (window as any).__env?.baseApiUrl ?? 'http://localhost:8080/api';
+  }
 
   public loadCategories() {
     return this.fetchCategories(

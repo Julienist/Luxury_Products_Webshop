@@ -36,7 +36,7 @@ public class SecurityConfig {
                 .userDetailsService(userService)
                 .addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**", "/products/**", "/categories").permitAll()
+                        .requestMatchers("/auth/**", "/products/**", "/categories/**").permitAll()
                         .requestMatchers("/admin/**", "/auth/register/admin").hasRole("ADMIN")
                         .requestMatchers("/orders/**").authenticated()
                         .requestMatchers("/error").anonymous()

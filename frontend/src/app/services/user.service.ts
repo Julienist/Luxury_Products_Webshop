@@ -14,10 +14,13 @@ export class UserService {
 
   private authTokenKey = 'authToken';
   private userIdKey = 'loggedInUserId';
-  private apiUrl = environment.baseApiUrl;
+  // private apiUrl = environment.baseApiUrl;
   private userRoles: string[] = [];
   private router = inject(Router);
 
+  private get apiUrl(): string {
+    return (window as any).__env?.baseApiUrl ?? 'http://localhost:8080/api';
+  }
 
   private loggedInSubject = new BehaviorSubject<boolean>(this.hasValidToken());
 

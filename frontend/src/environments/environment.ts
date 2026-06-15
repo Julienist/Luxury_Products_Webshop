@@ -1,3 +1,3 @@
 export const environment = {
-  baseApiUrl: 'http://localhost:8080/api',
+  baseApiUrl: (window as any).__env?.baseApiUrl ?? 'http://localhost:8080/api'
 };
