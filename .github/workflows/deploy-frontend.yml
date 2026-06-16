@@ -26,6 +26,12 @@ jobs:
         working-directory: frontend
         run: npm run build -- --configuration=production
 
+      - name: Start Tailscale
+        uses: tailscale/github-action@v2
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
+          args: --ephemeral
+
       - name: Deploy to VPS via rsync
         uses: burnett01/rsync-deployments@7.0.1
         with:
