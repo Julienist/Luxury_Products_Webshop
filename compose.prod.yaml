@@ -1,6 +1,6 @@
 services:
   backend:
-    image: ghcr.io/Julienist/luxury-backend:latest
+    image: ghcr.io/julienist/luxury-backend:latest
     ports:
       - "8080:8080"
     env_file:

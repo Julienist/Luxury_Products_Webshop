@@ -14,10 +14,10 @@ import java.util.Date;
 
 @Component
 public class JWTUtil {
-    @Value("${jwt_secret}")
+    @Value("${jwt.secret}")
     private String secret;
 
-    @Value("${JWT_EXPIRATION}")
+    @Value("${jwt.expiration}")
     private int expiration;
 
     public String generateToken(String email) throws IllegalArgumentException, JWTCreationException {
