@@ -62,5 +62,5 @@ jobs:
           script: |
             cd ${{ secrets.VPS_BACKEND_PATH }}
             podman pull ghcr.io/${{ github.repository_owner }}/luxury-backend:latest
-            podman-compose -f compose.prod.yaml down
-            podman-compose -f compose.prod.yaml up -d
+            podman-compose -f compose.yaml down
+            podman-compose -f compose.yaml up -d
