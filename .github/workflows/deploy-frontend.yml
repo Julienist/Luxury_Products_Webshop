@@ -31,7 +31,6 @@ jobs:
         uses: tailscale/github-action@v2
         with:
           authkey: ${{ secrets.TAILSCALE_AUTHKEY }}
-          args: --ephemeral
 
       - name: Deploy to VPS via rsync
         uses: burnett01/rsync-deployments@7.0.1
