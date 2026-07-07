@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'backend/**'
+      - "backend/**"
   workflow_dispatch:
 
 env:
@@ -36,6 +36,7 @@ jobs:
           context: .
           file: backend/Dockerfile
           push: true
+          no-cache: true
           tags: |
             ghcr.io/${{ env.IMAGE_NAME }}:latest
             ghcr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
@@ -45,6 +46,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Set lowercase image name
+        run: echo "IMAGE_NAME=$(echo '${{ github.repository_owner }}/luxury-backend' | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
+
       - name: Start Tailscale
         uses: tailscale/github-action@v2
         with:
@@ -52,15 +56,14 @@ jobs:
           oauth-secret: ${{ secrets.TAILSCALE_OAUTH_SECRET }}
           tags: tag:ci
 
-
       - name: Deploy via SSH (Tailscale IP)
         uses: appleboy/ssh-action@v1.0.3
         with:
-          host: ${{ secrets.TAILSCALE_IP }}   # 100.x.x.x adres van je VPS
+          host: ${{ secrets.TAILSCALE_IP }} # 100.x.x.x adres van je VPS
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
             cd ${{ secrets.VPS_BACKEND_PATH }}
-            podman pull ghcr.io/${{ github.repository_owner }}/luxury-backend:latest
+            podman pull ghcr.io/${{ env.IMAGE_NAME }}:latest
             podman-compose -f compose.yaml down
             podman-compose -f compose.yaml up -d

@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'frontend/**'
+      - "frontend/**"
   workflow_dispatch:
 
 jobs:
@@ -15,8 +15,8 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "20"
+          cache: "npm"
           cache-dependency-path: frontend/package-lock.json
 
       - name: Install dependencies
@@ -33,6 +33,17 @@ jobs:
           oauth-client-id: ${{ secrets.TAILSCALE_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TAILSCALE_OAUTH_SECRET }}
           tags: tag:ci
+
+      - name: Write env.js
+        working-directory: frontend
+        run: |
+          cat > dist/retro-vania/browser/assets/env.js << EOF
+          (function (window) {
+            window.__env = {
+              baseApiUrl: "${{secrets.API_URL }}"
+            };
+          })(this);
+          EOF
 
       - name: Deploy to VPS via rsync
         uses: burnett01/rsync-deployments@7.0.1
